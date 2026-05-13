@@ -61,9 +61,8 @@ export default function RootLayout({
       ? "24px"
       : "60px",
   alignItems: "start",
-  maxWidth: "1400px",
-  margin: "0 auto",
   width: "100%",
+  margin: "0 auto",
 }}
     >
       {/* LOGO */}
