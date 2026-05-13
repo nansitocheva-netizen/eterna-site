@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { Cormorant_Garamond } from "next/font/google";
 import {
   SkipBack,
   Play,
@@ -11,28 +12,32 @@ import {
   Volume2,
 } from "lucide-react";
 
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin", "cyrillic"],
+  weight: ["300", "400", "500"],
+});
+
 export default function VideoAlbumPage() {
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
 <>
+{/* NAVBAR */}
 <header
-    style={{
-    position: "fixed",
+  style={{
+    position: "sticky",
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 50,
+    zIndex: 10,
     display: "grid",
     gridTemplateColumns: "auto 1fr auto",
     alignItems: "center",
-    padding: "34px 60px",
+    padding: "42px 82px",
     columnGap: "16px",
     fontSize: "14px",
-    background: "rgba(252,250,247,0.72)",
-    backdropFilter: "blur(14px)",
-    WebkitBackdropFilter: "blur(14px)",
+    backgroundColor: "#fcfaf7",
     color: "#111",
   }}
 >
@@ -61,13 +66,113 @@ export default function VideoAlbumPage() {
 
   <div
     style={{
-      fontSize: "18px",
+      fontSize: "22px",
+      cursor: "pointer",
       letterSpacing: "1px",
     }}
   >
-    VIDEO ALBUM
+    ЗАПАЗИ ДАТА →
   </div>
 </header>
+{menuOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "320px",
+      height: "100vh",
+      backdropFilter: "blur(10px)",
+transition: "0.4s ease",backgroundColor: "rgba(252,250,247,0.96)",
+      padding: "48px",
+      zIndex: 100,
+      display: "flex",
+      flexDirection: "column",
+      gap: "28px",
+      fontSize: "22px",
+    }}
+  >
+    <div
+      onClick={() => setMenuOpen(false)}
+      style={{
+        fontSize: "28px",
+        cursor: "pointer",
+        marginBottom: "30px",
+      }}
+    >
+      ✕
+    </div>
+
+  <a
+  href="/video-booth"
+  style={{
+    cursor: "pointer",
+    transition: "0.3s",
+    textDecoration: "none",
+    color: "#3e352d",
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.opacity = "0.6";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.opacity = "1";
+  }}
+>
+  Видео будка
+</a>
+<a
+  href="/video-booth"
+  style={{
+    cursor: "pointer",
+    transition: "0.3s",
+    textDecoration: "none",
+    color: "#3e352d",
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.opacity = "0.6";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.opacity = "1";
+  }}
+>
+  Видео албум
+</a>
+<a
+  href="/video-booth"
+  style={{
+    cursor: "pointer",
+    transition: "0.3s",
+    textDecoration: "none",
+    color: "#3e352d",
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.opacity = "0.6";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.opacity = "1";
+  }}
+>
+  Галерия
+</a>
+<a
+  href="/video-booth"
+  style={{
+    cursor: "pointer",
+    transition: "0.3s",
+    textDecoration: "none",
+    color: "#3e352d",
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.opacity = "0.6";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.opacity = "1";
+  }}
+>
+  Контакти
+</a>  </div>
+)}
+
       <main
         style={{
           minHeight: "100vh",
@@ -188,7 +293,7 @@ export default function VideoAlbumPage() {
   }}
 >
   <Image
-    src="/public/logo.png"
+    src="/logo.png"
     alt="Eterna Logo"
     width={240}
     height={80}
