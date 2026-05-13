@@ -5,7 +5,7 @@
   --foreground: #171717;
 }
 
-@theme inline {
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -248,4 +248,42 @@ body {
   .booking-form-grid {
     grid-template-columns: 1fr;
   }
+}
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+
+  section {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  h1 {
+    font-size: 42px !important;
+    line-height: 1.1 !important;
+  }
+
+  div[style*="1280px"] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  div[style*="45%"] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
 }
