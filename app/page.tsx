@@ -429,10 +429,7 @@ margin: "18px auto  24px",
     maxWidth: "1280px",
     margin: "0 auto",
     display: "grid",
-    gridTemplateColumns:
-      typeof window !== "undefined" && window.innerWidth < 768
-        ? "1fr"
-        : "repeat(3, minmax(0, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
     gap: "24px",
   }}
 ></div>
