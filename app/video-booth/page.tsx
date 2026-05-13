@@ -17,22 +17,27 @@ export default function VideoBooth() {
     minHeight: "100vh",
     backgroundColor: "#f8f4ef",
     fontFamily: cormorant.style.fontFamily,
-    zoom: "0.85",
       }}
     >
       {/* NAVBAR */}
       <header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 100,
-          display: "grid",
-          gridTemplateColumns: "auto 1fr auto",
-          alignItems: "center",
-          padding: "38px 82px",
-          backgroundColor: "rgba(252,250,247,0.92)",
-          backdropFilter: "blur(10px)",
-        }}
+  style={{
+    position: "sticky",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "20px",
+    flexWrap: "wrap",
+    width: "100%",
+    boxSizing: "border-box",
+    fontSize: "14px",
+    backgroundColor: "#fcfaf7",
+    color: "#111",
+  }}
       >
         <div
           onClick={() => setMenuOpen(true)}

@@ -18,7 +18,6 @@ flexDirection: "column",
 fontFamily: cormorant.style.fontFamily,
 }}
 >
-```tsx
 {/* NAVBAR */}
 <header
   style={{
@@ -54,8 +53,8 @@ fontFamily: cormorant.style.fontFamily,
     style={{
       fontSize: "14px",
       textAlign: "center",
-      letterSpacing: "14px",
-      wordSpacing: "18px",
+      letterSpacing: "6px",
+      wordSpacing: "6px",
       whiteSpace: "nowrap",
       fontWeight: 600,
     }}
@@ -120,7 +119,7 @@ transition: "0.4s ease",backgroundColor: "rgba(252,250,247,0.96)",
   Видео будка
 </a>
 <a
-  href="/video-booth"
+  href="/video-album"
   style={{
     cursor: "pointer",
     transition: "0.3s",
@@ -137,7 +136,7 @@ transition: "0.4s ease",backgroundColor: "rgba(252,250,247,0.96)",
   Видео албум
 </a>
 <a
-  href="/video-booth"
+  href="/gallery"
   style={{
     cursor: "pointer",
     transition: "0.3s",
@@ -154,7 +153,7 @@ transition: "0.4s ease",backgroundColor: "rgba(252,250,247,0.96)",
   Галерия
 </a>
 <a
-  href="/video-booth"
+  href="/contacts"
   style={{
     cursor: "pointer",
     transition: "0.3s",
@@ -176,7 +175,7 @@ transition: "0.4s ease",backgroundColor: "rgba(252,250,247,0.96)",
 <section
   style={{
     height: "100vh",
-    minHeight: "920px",
+    minHeight: "760px",
     position: "relative",
     backgroundImage: "url('/hero.jpg')",
     backgroundSize: "cover",
@@ -200,7 +199,7 @@ transition: "0.4s ease",backgroundColor: "rgba(252,250,247,0.96)",
       zIndex: 1,
 width: "100%",
 height: "100%",
-padding: "160px 0 80px 120px",
+padding: "120px 24px 60px",
 display: "flex",
 flexDirection: "column",
 justifyContent: "flex-start",
@@ -278,7 +277,7 @@ fontWeight: 500,
 {/* FEATURES */}
 <section
 style={{
-padding: "120px 96px 160px",
+padding: "100px 24px",
 backgroundColor: "#fbf7f2",
 }}
 >
@@ -423,13 +422,3 @@ margin: "18px auto  24px",
 </main>
 );
 }
-
-<div
-  style={{
-    maxWidth: "1280px",
-    margin: "0 auto",
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: "24px",
-  }}
-></div>
