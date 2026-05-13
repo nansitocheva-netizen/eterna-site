@@ -33,9 +33,15 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-        className={`${geistSans.variable} ${geistMono.variable}`}
-    >
+  lang="en"
+  className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+  style={{
+    width: "100%",
+    minWidth: "100%",
+    maxWidth: "100%",
+    overflowX: "hidden",
+  }}
+>
        <head>
       <meta
         name="viewport"
@@ -46,6 +52,8 @@ export default function RootLayout({
       <body
   style={{
     width: "100%",
+    minWidth: "100%" ,
+    maxWidth: "100%",
     overflowX: "hidden",
     margin: 0,
     padding: 0,
