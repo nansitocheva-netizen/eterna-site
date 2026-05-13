@@ -32,6 +32,7 @@ export default function Home() {
         flexDirection: "column",
         fontFamily: cormorant.style.fontFamily,
         width: "100%",
+        maxWidth: "100vw",
         overflowX: "hidden",
       }}
     >
@@ -50,6 +51,7 @@ export default function Home() {
           style={{
             width: "100%",
             maxWidth: "100vw",
+            overflowX: "hidden",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -74,11 +76,11 @@ export default function Home() {
           <div
             style={{
               flex: 1,
+              minWidth: 0,
               textAlign: "center",
-              fontSize: isMobile ? "9px" : "14px",
-              letterSpacing: isMobile ? "2px" : "6px",
+              fontSize: isMobile ? "8x" : "14px",
+              letterSpacing: isMobile ? "1px" : "6px",
               fontWeight: 600,
-              whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
             }}
