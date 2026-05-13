@@ -276,16 +276,6 @@ img {
     line-height: 1.1 !important;
   }
 
-  div[style*="1280px"] {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  div[style*="45%"] {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
 }
 
 html,
