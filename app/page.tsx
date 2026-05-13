@@ -40,56 +40,63 @@ export default function Home() {
         style={{
           position: "sticky",
           top: 0,
-          left: 0,
-          right: 0,
           zIndex: 10,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: isMobile ? "16px" : "20px",
           width: "100%",
-          boxSizing: "border-box",
           backgroundColor: "#fcfaf7",
-          color: "#111",
-          overflow: "hidden",
+          borderBottom: "1px solid rgba(0,0,0,0.04)",
         }}
       >
         <div
-          onClick={() => setMenuOpen(true)}
           style={{
-            cursor: "pointer",
-            fontSize: isMobile ? "22px" : "28px",
-            flexShrink: 0,
-          }}
-        >
-          ☰
-        </div>
-
-        <div
-          style={{
-            fontSize: isMobile ? "10px" : "14px",
-            textAlign: "center",
-            letterSpacing: isMobile ? "2px" : "6px",
-            whiteSpace: "nowrap",
-            fontWeight: 600,
-            flex: 1,
-            padding: "0 12px",
+            width: "100%",
+            maxWidth: "100vw",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: isMobile ? "14px 16px" : "20px",
+            boxSizing: "border-box",
             overflow: "hidden",
+            gap: isMobile ? "10px" : "20px",
           }}
         >
-          ETERNA MEMORIES
-        </div>
+          <div
+            onClick={() => setMenuOpen(true)}
+            style={{
+              cursor: "pointer",
+              fontSize: isMobile ? "22px" : "28px",
+              flexShrink: 0,
+              width: isMobile ? "24px" : "32px",
+            }}
+          >
+            ☰
+          </div>
 
-        <div
-          style={{
-            fontSize: isMobile ? "14px" : "22px",
-            cursor: "pointer",
-            letterSpacing: "1px",
-            flexShrink: 0,
-            whiteSpace: "nowrap",
-          }}
-        >
-          ЗАПАЗИ ДАТА →
+          <div
+            style={{
+              flex: 1,
+              textAlign: "center",
+              fontSize: isMobile ? "9px" : "14px",
+              letterSpacing: isMobile ? "2px" : "6px",
+              fontWeight: 600,
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            ETERNA MEMORIES
+          </div>
+
+          <div
+            style={{
+              fontSize: isMobile ? "12px" : "22px",
+              cursor: "pointer",
+              letterSpacing: "1px",
+              flexShrink: 0,
+              whiteSpace: "nowrap",
+            }}
+          >
+            ЗАПАЗИ ДАТА →
+          </div>
         </div>
       </header>
 
@@ -103,7 +110,6 @@ export default function Home() {
             maxWidth: "100vw",
             height: "100vh",
             backdropFilter: "blur(10px)",
-            transition: "0.4s ease",
             backgroundColor: "rgba(252,250,247,0.96)",
             padding: "48px",
             zIndex: 100,
@@ -128,8 +134,6 @@ export default function Home() {
           <a
             href="/video-booth"
             style={{
-              cursor: "pointer",
-              transition: "0.3s",
               textDecoration: "none",
               color: "#3e352d",
             }}
@@ -140,8 +144,6 @@ export default function Home() {
           <a
             href="/video-album"
             style={{
-              cursor: "pointer",
-              transition: "0.3s",
               textDecoration: "none",
               color: "#3e352d",
             }}
@@ -152,8 +154,6 @@ export default function Home() {
           <a
             href="/gallery"
             style={{
-              cursor: "pointer",
-              transition: "0.3s",
               textDecoration: "none",
               color: "#3e352d",
             }}
@@ -164,8 +164,6 @@ export default function Home() {
           <a
             href="/contacts"
             style={{
-              cursor: "pointer",
-              transition: "0.3s",
               textDecoration: "none",
               color: "#3e352d",
             }}
@@ -185,7 +183,6 @@ export default function Home() {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           width: "100%",
-          overflow: "hidden",
         }}
       >
         <div
@@ -203,10 +200,9 @@ export default function Home() {
             position: "relative",
             zIndex: 1,
             width: "100%",
-            height: "100%",
             padding: isMobile
               ? "80px 20px 40px"
-              : "120px 24px 60px",
+              : "120px 40px 60px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
@@ -285,10 +281,9 @@ export default function Home() {
       {/* FEATURES */}
       <section
         style={{
-          padding: isMobile ? "70px 20px" : "100px 24px",
+          padding: isMobile ? "70px 20px" : "100px 40px",
           backgroundColor: "#fbf7f2",
           width: "100%",
-          overflow: "hidden",
           boxSizing: "border-box",
         }}
       >
@@ -308,62 +303,14 @@ export default function Home() {
             {
               title: "ВИДЕО ПОСЛАНИЯ",
               text: "Вашите гости оставят видео послания, пълни с емоции и пожелания.",
-              icon: (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="34"
-                  height="34"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" />
-                  <rect x="2" y="6" width="14" height="12" rx="2" />
-                </svg>
-              ),
             },
             {
               title: "НЕЗАБРАВИМИ СПОМЕНИ",
               text: "Истински думи, смях и чувства, които ще съхранявате завинаги.",
-              icon: (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="34"
-                  height="34"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/>
-                </svg>
-              ),
             },
             {
               title: "ЛЕСНО И УДОБНО",
               text: "Получавате всички видео послания с високо качество след вашето събитие.",
-              icon: (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="34"
-                  height="34"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 13v8l-4-4" />
-                  <path d="m12 21 4-4" />
-                  <path d="M4.393 15.269A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.436 8.284" />
-                </svg>
-              ),
             },
           ].map((item, index) => (
             <div
@@ -388,9 +335,7 @@ export default function Home() {
                   placeItems: "center",
                   color: "#b59a78",
                 }}
-              >
-                {item.icon}
-              </div>
+              />
 
               <div>
                 <div
