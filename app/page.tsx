@@ -108,8 +108,8 @@ export default function Home() {
             position: "fixed",
             top: 0,
             left: 0,
-            width: "320px",
-            maxWidth: "100vw",
+            width: "100%" ,
+            maxWidth: "100%",
             height: "100vh",
             backdropFilter: "blur(10px)",
             backgroundColor: "rgba(252,250,247,0.96)",
@@ -215,7 +215,6 @@ export default function Home() {
           <div
             style={{
               width: "100%",
-              maxWidth: "500px",
             }}
           >
             <h1
