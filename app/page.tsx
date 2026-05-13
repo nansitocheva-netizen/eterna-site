@@ -176,7 +176,7 @@ transition: "0.4s ease",backgroundColor: "rgba(252,250,247,0.96)",
 <section
   style={{
     height: "100vh",
-    minHeight: "760px",
+    minHeight: "100vh",
     position: "relative",
     backgroundImage: "url('/hero.jpg')",
     backgroundSize: "cover",

@@ -42,7 +42,7 @@ export default function RootLayout({
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
     </head>
-    
+
       <body
   style={{
     width: "100%",
@@ -59,7 +59,7 @@ export default function RootLayout({
       background:
         "linear-gradient(to right, #1c140f, #2b1d16)",
       color: "#f5ede6",
-      padding: "90px",
+      padding: "90px 24px",
       marginTop: "120px",
     }}
   >
@@ -237,7 +237,7 @@ export default function RootLayout({
           lineHeight: "1.8",
           textAlign: "left",
           marginTop: "28px",
-          marginLeft: "60px",
+          marginLeft: "0px",
         }}
       >
         <div style={{ whiteSpace: "nowrap" }}>© 2026 ETERNA</div>
