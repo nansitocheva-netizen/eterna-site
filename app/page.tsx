@@ -27,15 +27,18 @@ fontFamily: cormorant.style.fontFamily,
     left: 0,
     right: 0,
     zIndex: 10,
-    display: "grid",
-    gridTemplateColumns: "auto 1fr auto",
+    display: "flex",
+    justifyContent: "space-between",
     alignItems: "center",
-    padding: "42px 82px",
-    columnGap: "16px",
+    padding: "20px",
+    flexWrap: "wrap",
+    width: "100%",
+    boxSizing: "border-box",
     fontSize: "14px",
     backgroundColor: "#fcfaf7",
     color: "#111",
   }}
+
 >
   <div
     onClick={() => setMenuOpen(true)}
