@@ -50,20 +50,14 @@ export default function RootLayout({
     }}
   >
     <div
-     style={{
-  display: "grid",
-  gridTemplateColumns:
-    typeof window !== "undefined" && window.innerWidth < 768
-      ? "1fr"
-      : "1.2fr 1fr 1fr 1fr",
-  gap:
-    typeof window !== "undefined" && window.innerWidth < 768
-      ? "24px"
-      : "60px",
-  alignItems: "start",
-  width: "100%",
-  margin: "0 auto",
-}}
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: "24px",
+    alignItems: "start",
+    width: "100%",
+    margin: "0 auto",
+  }}
     >
       {/* LOGO */}
       <div
