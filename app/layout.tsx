@@ -34,9 +34,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-full flex flex-col">
+      <body
+  style={{
+    width: "100%",
+    overflowX: "hidden",
+    margin: 0,
+    padding: 0,
+  }}
+>
   {children}
   <BookingModal />
 
