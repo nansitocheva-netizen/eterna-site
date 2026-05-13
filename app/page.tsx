@@ -193,15 +193,15 @@ transition: "0.4s ease",backgroundColor: "rgba(252,250,247,0.96)",
 
   <div
     style={{
-      position: "relative",
-      zIndex: 1,
-width: "100%",
-height: "100%",
-padding: "160px 0 80px 120px",
-display: "flex",
-flexDirection: "column",
-justifyContent: "flex-start",
-alignItems: "flex-start",
+  position: "relative",
+  zIndex: 1,
+  width: "100%",
+  height: "100%",
+  padding: "120px 24px 80px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  alignItems: "flex-start",
 }}
 >
 <div
@@ -284,7 +284,10 @@ style={{
 maxWidth: "1280px",
 margin: "0 auto",
 display: "grid",
-gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+gridTemplateColumns:
+  typeof window !== "undefined" && window.innerWidth < 768
+    ? "1fr"
+    : "repeat(3, minmax(0, 1fr))",
 gap: "72px",
 }}
 >
