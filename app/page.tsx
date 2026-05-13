@@ -208,7 +208,7 @@ alignItems: "flex-start",
 >
 <div
 style={{
-width: "45%",
+width: "100%",
 maxWidth: "500px",
 }}
 >
@@ -286,7 +286,10 @@ style={{
 maxWidth: "1280px",
 margin: "0 auto",
 display: "grid",
-gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+gridTemplateColumns:
+  typeof window !== "undefined" && window.innerWidth < 768
+    ? "1fr"
+    : "repeat(3, minmax(0, 1fr))",
 gap: "24px",
 }}
 >
@@ -360,7 +363,10 @@ borderRight:
 index !== 2
 ? "1px solid rgba(184,155,108,0.18)"
 : "none",
-paddingRight: "36px",
+paddingRight:
+  typeof window !== "undefined" && window.innerWidth < 768
+    ? "0px"
+    : "36px",
 }}
 >
 <div
