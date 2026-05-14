@@ -19,6 +19,27 @@ export default function VideoAlbumPage() {
 
   return (
     <main className={styles.main}>
+
+      {/* ── INTRO ── */}
+      <section className={styles.intro}>
+        <div className={styles.introEyebrow}>ВИДЕО АЛБУМ</div>
+        <div className={styles.introLine} />
+        <h1 className={styles.introHeading}>
+          Физически продукт.
+          <br />
+          Дигитален достъп.
+          <br />
+          Спомени за цял живот.
+        </h1>
+        <p className={styles.introText}>
+          Не просто видео файлове — получавате красив физически албум,
+          персонализиран с вашите имена и дата на събитието, с вграден
+          дигитален достъп до всички послания от гостите ви.
+          <br />
+          По-долу можете да разгледате как изглежда отвътре.
+        </p>
+      </section>
+
       <section className={styles.content}>
         <div className={styles.albumContainer}>
           <div className={styles.albumWrapper}>
@@ -112,6 +133,21 @@ export default function VideoAlbumPage() {
           </button>
         </div>
       </section>
+
+      {/* ── CTA ── */}
+      <section className={styles.albumCta}>
+        <p className={styles.albumCtaText}>
+          Искате такъв албум за вашето събитие?
+        </p>
+        <button
+          type="button"
+          className={styles.albumCtaBtn}
+          data-booking-trigger="true"
+        >
+          ПРОВЕРИ СВОБОДНИ ДАТИ
+        </button>
+      </section>
+
     </main>
   );
 }

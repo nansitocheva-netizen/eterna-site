@@ -226,6 +226,29 @@
   display: block;
 }
 
+/* ── Closing CTA ── */
+.closingCta {
+  background: linear-gradient(135deg, var(--footer-from) 0%, var(--footer-to) 100%);
+  padding: 140px 60px;
+  text-align: center;
+}
+
+.closingCtaHeading {
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--footer-text);
+  margin: 0 0 28px;
+  line-height: 1.3;
+  font-family: var(--font-cormorant), serif;
+}
+
+.closingCtaText {
+  font-size: 19px;
+  line-height: 2;
+  color: var(--footer-link);
+  margin: 0 0 52px;
+}
+
 /* =============================================
    MOBILE
    ============================================= */
@@ -275,5 +298,13 @@
 
   .featureItem {
     font-size: 18px;
+  }
+
+  .closingCta {
+    padding: 90px 24px;
+  }
+
+  .closingCtaHeading {
+    font-size: 34px;
   }
 }

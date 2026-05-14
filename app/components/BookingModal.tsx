@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import styles from "./BookingModal.module.css";
 
-const BOOKING_TEXT_RE = /Запази[\s\S]*дата/i;
 const EVENT_OPTIONS = [
   "Сватба",
   "Рожден ден",
@@ -53,15 +52,8 @@ export default function BookingModal() {
   useEffect(() => {
     const handleGlobalClick = (event: MouseEvent) => {
       if (open) return;
-      const target = (event.target as HTMLElement)?.closest("button, a, [role='button'], div");
+      const target = (event.target as HTMLElement)?.closest("[data-booking-trigger='true']");
       if (!target) return;
-      if ((target as HTMLElement).dataset?.bookingTrigger === "true") {
-        event.preventDefault();
-        setOpen(true);
-        return;
-      }
-      const text = target.textContent?.trim() || "";
-      if (!BOOKING_TEXT_RE.test(text)) return;
       event.preventDefault();
       setOpen(true);
     };

@@ -1,0 +1,252 @@
+/* =============================================
+   CONTACT PAGE
+   ============================================= */
+.main {
+  min-height: 100vh;
+  background-color: var(--bg-base);
+  font-family: var(--font-cormorant), serif;
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 120px 60px 80px;
+  text-align: center;
+  background: var(--bg-section);
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-label);
+  margin-bottom: 16px;
+}
+
+.eyebrowLine {
+  width: 50px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 52px;
+}
+
+.heading {
+  font-size: 60px;
+  font-weight: 300;
+  color: var(--text-heading);
+  margin: 0 0 28px;
+  font-family: inherit;
+}
+
+.subtext {
+  font-size: 19px;
+  line-height: 2;
+  color: var(--text-body);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── Contact Grid ── */
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 100px 60px 120px;
+  align-items: start;
+}
+
+/* ── Info column ── */
+.infoLabel {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-label);
+  margin-bottom: 16px;
+}
+
+.infoLabelLine {
+  width: 42px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 40px;
+}
+
+.infoCards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px 28px;
+  background: var(--bg-warm);
+  border: 1px solid rgba(199, 178, 138, 0.2);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+.infoCard:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.infoCardLabel {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-label);
+}
+
+.infoCardValue {
+  font-size: 19px;
+  color: var(--text-heading);
+  font-weight: 400;
+}
+
+/* ── Form column ── */
+.formCol {
+  /* matches info column header alignment */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-label);
+}
+
+.input,
+.textarea {
+  background: var(--bg-warm);
+  border: 1px solid rgba(199, 178, 138, 0.3);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 17px;
+  color: var(--text-heading);
+  font-family: inherit;
+  transition: border-color 200ms ease;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-label);
+  opacity: 0.7;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--gold);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.submitBtn {
+  align-self: flex-start;
+  background: var(--cta-bg);
+  color: var(--cta-text);
+  border: none;
+  padding: 18px 44px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: inherit;
+  transition: opacity 180ms ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+  opacity: 0.82;
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.errorMsg {
+  font-size: 15px;
+  color: #c0392b;
+  margin: 0;
+}
+
+/* ── Success state ── */
+.successBox {
+  padding: 48px 40px;
+  background: var(--bg-warm);
+  border: 1px solid rgba(199, 178, 138, 0.25);
+  border-radius: 20px;
+  text-align: center;
+}
+
+.successTitle {
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--text-heading);
+  margin-bottom: 16px;
+}
+
+.successText {
+  font-size: 18px;
+  line-height: 2;
+  color: var(--text-body);
+  margin: 0;
+}
+
+/* =============================================
+   MOBILE
+   ============================================= */
+@media (max-width: 767px) {
+  .hero {
+    padding: 80px 24px 60px;
+  }
+
+  .heading {
+    font-size: 40px;
+  }
+
+  .contactGrid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    padding: 70px 24px 80px;
+  }
+
+  .fieldRow {
+    grid-template-columns: 1fr;
+  }
+
+  .submitBtn {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -11,7 +11,9 @@ import styles from "./Navbar.module.css";
  * Link navigation so the menu doesn't stay open on client-side routing.
  */
 function closeMenu() {
-  const toggle = document.getElementById("nav-toggle") as HTMLInputElement | null;
+  const toggle = document.getElementById(
+    "nav-toggle",
+  ) as HTMLInputElement | null;
   if (toggle) toggle.checked = false;
 }
 
@@ -22,29 +24,86 @@ export default function Navbar() {
       <input type="checkbox" id="nav-toggle" className={styles.toggle} />
 
       {/* Clicking the backdrop unchecks the toggle, closing the menu */}
-      <label htmlFor="nav-toggle" className={styles.backdrop} aria-hidden="true" />
+      <label
+        htmlFor="nav-toggle"
+        className={styles.backdrop}
+        aria-hidden="true"
+      />
 
       {/* Slide-in menu panel */}
       <div className={styles.menu} role="navigation" aria-label="Главно меню">
-        <label htmlFor="nav-toggle" className={styles.closeBtn} aria-label="Затвори меню">
+        <label
+          htmlFor="nav-toggle"
+          className={styles.closeBtn}
+          aria-label="Затвори меню"
+        >
           ✕
         </label>
-        <Link href="/" className={styles.menuLink} onClick={closeMenu}>Начало</Link>
-        <Link href="/video-booth" className={styles.menuLink} onClick={closeMenu}>Видео будка</Link>
-        <Link href="/video-album" className={styles.menuLink} onClick={closeMenu}>Видео албум</Link>
-        <Link href="/gallery" className={styles.menuLink} onClick={closeMenu}>Галерия</Link>
-        <Link href="/contact" className={styles.menuLink} onClick={closeMenu}>Контакти</Link>
+        <Link href="/" className={styles.menuLink} onClick={closeMenu}>
+          Начало
+        </Link>
+        <Link
+          href="/video-booth"
+          className={styles.menuLink}
+          onClick={closeMenu}
+        >
+          Видео будка
+        </Link>
+        <Link
+          href="/video-album"
+          className={styles.menuLink}
+          onClick={closeMenu}
+        >
+          Видео албум
+        </Link>
+        <Link href="/gallery" className={styles.menuLink} onClick={closeMenu}>
+          Галерия
+        </Link>
+        <Link href="/contact" className={styles.menuLink} onClick={closeMenu}>
+          Контакти
+        </Link>
       </div>
 
       {/* Visible bar */}
       <div className={styles.bar}>
-        <label htmlFor="nav-toggle" className={styles.hamburger} aria-label="Отвори меню">
+        {/* Hamburger — mobile only */}
+        <label
+          htmlFor="nav-toggle"
+          className={styles.hamburger}
+          aria-label="Отвори меню"
+        >
           ☰
         </label>
-        <Link href="/" className={styles.logo} onClick={closeMenu}>ETERNA MEMORIES</Link>
-        <button className={styles.ctaBtn} data-booking-trigger="true">
-          ЗАПАЗИ ДАТА →
-        </button>
+
+        {/* Desktop: left two nav links */}
+        <nav className={styles.desktopNavLeft}>
+          <Link href="/video-booth" className={styles.desktopLink}>
+            Видео будка
+          </Link>
+          <Link href="/video-album" className={styles.desktopLink}>
+            Видео албум
+          </Link>
+        </nav>
+
+        {/* Logo — centered on both mobile and desktop */}
+        <Link href="/" className={styles.logo} onClick={closeMenu}>
+          ETERNA MEMORIES
+        </Link>
+
+        {/* Desktop: right two nav links + CTA — grouped so both sides of logo are equal width */}
+        <div className={styles.desktopNavRight}>
+          <nav className={styles.desktopNavRightLinks}>
+            <Link href="/gallery" className={styles.desktopLink}>
+              Галерия
+            </Link>
+            <Link href="/contact" className={styles.desktopLink}>
+              Контакти
+            </Link>
+          </nav>
+          <button className={styles.ctaBtn} data-booking-trigger="true">
+            ЗАПАЗИ ДАТА
+          </button>
+        </div>
       </div>
     </header>
   );
