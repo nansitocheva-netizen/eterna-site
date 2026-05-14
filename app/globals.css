@@ -1,291 +1,60 @@
 @import "tailwindcss";
 
+/* =============================================
+   DESIGN TOKENS — use these everywhere
+   ============================================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --bg-base: #f6f1ec;
+  --bg-warm: #fcfaf7;
+  --bg-section: #fbf7f2;
+  --bg-muted: #f3ece5;
+  --bg-icon: #f5eee7;
+
+  /* Text */
+  --text-heading: #2f2a28;
+  --text-body: #5f5a55;
+  --text-nav: #3e352d;
+  --text-label: #9d8972;
+
+  /* Accent / Gold */
+  --gold: #c7b28a;
+  --gold-mid: #b59a78;
+  --gold-border: #d8c7ad;
+
+  /* CTA (dark pill button) */
+  --cta-bg: #111111;
+  --cta-text: #ffffff;
+
+  /* Footer */
+  --footer-from: #1c140f;
+  --footer-to: #2b1d16;
+  --footer-text: #f5ede6;
+  --footer-link: #d8cfc6;
+  --footer-sub: #cbb9ad;
 }
 
-:root {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* =============================================
+   BASE RESETS
+   ============================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.footer-link {
-  color: #d8cfc6;
-  text-decoration: none;
-  transition: color 180ms ease;
-}
-
-.footer-link:hover {
-  color: #f5ede6;
-}
-
-.footer-link:focus-visible {
-  outline: 1px solid #f5ede6;
-  outline-offset: 2px;
-}
-
-.booking-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(14, 10, 8, 0.75);
-  backdrop-filter: blur(14px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  z-index: 9999;
-  opacity: 0;
-  animation: booking-fade-in 220ms ease forwards;
-}
-
-.booking-modal-card {
-  width: min(480px, 100%);
-  max-width: 480px;
-  max-height: 90vh;
-  background: #fbf7f1;
-  border: 1px solid rgba(120, 96, 72, 0.12);
-  box-shadow: 0 34px 72px rgba(15, 11, 8, 0.16);
-  border-radius: 28px;
-  padding: 20px 20px 18px;
-  position: relative;
-  opacity: 0;
-  transform: translateY(18px) scale(0.98);
-  animation: booking-card-pop 240ms ease forwards;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.booking-modal-content {
-  flex: 1;
-  overflow-y: auto;
-  max-height: calc(90vh - 80px);
-  padding-right: 6px;
-  padding-top: 6px;
-}
-
-@keyframes booking-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes booking-card-pop {
-  from {
-    opacity: 0;
-    transform: translateY(28px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.booking-modal-close {
-  position: absolute;
-  right: 18px;
-  top: 18px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(120, 96, 72, 0.18);
-  width: 38px;
-  height: 38px;
-  border-radius: 999px;
-  color: #2f2a27;
-  font-size: 20px;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  transition: background 180ms ease, transform 180ms ease;
-  z-index: 1;
-}
-
-.booking-modal-close:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: scale(1.02);
-}
-
-.booking-modal-headline {
-  max-width: 520px;
-  margin-bottom: 24px;
-  padding-top: 4px;
-}
-
-.booking-modal-tag {
-  display: inline-flex;
-  letter-spacing: 4px;
-  font-size: 11px;
-  text-transform: uppercase;
-  color: #9d8b74;
-  margin-bottom: 16px;
-}
-
-.booking-modal-headline h2 {
-  margin: 0 0 14px;
-  font-size: 34px;
-  font-weight: 300;
-  color: #2f2a27;
-}
-
-.booking-modal-headline p {
+  width: 100%;
+  overflow-x: hidden;
   margin: 0;
-  color: #5f5752;
-  line-height: 1.8;
+  padding: 0;
 }
 
-.booking-form {
-  display: grid;
-  gap: 14px;
-}
-
-.booking-form-grid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.booking-form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  color: #3f3935;
-  font-size: 14px;
-}
-
-.booking-form-field input,
-.booking-form-field select,
-.booking-form-field textarea {
-  background: #fff;
-  border: 1px solid rgba(79, 62, 45, 0.16);
-  border-radius: 16px;
-  padding: 12px 14px;
-  color: #2f2a27;
-  font-size: 14px;
-  min-height: 38px;
-}
-
-.booking-form-field textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-.booking-form-field--span {
-  grid-column: 1 / -1;
-}
-
-.booking-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #111;
-  color: #f5ede6;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  padding: 14px 28px;
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 3px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: transform 180ms ease, background 180ms ease, color 180ms ease, border 180ms ease;
-}
-
-.booking-button:hover {
-  background: #1f1f1f;
-  color: #fff;
-  transform: translateY(-1px);
-}
-
-.booking-button--full {
-  width: 100%;
-}
-
-.booking-form-error {
-  color: #8a2b1d;
-  background: rgba(226, 86, 64, 0.08);
-  border: 1px solid rgba(226, 86, 64, 0.18);
-  padding: 16px 18px;
-  border-radius: 18px;
-  font-size: 14px;
-}
-
-.booking-modal-success {
-  display: grid;
-  gap: 24px;
-  padding: 24px 0 12px;
-}
-
-.booking-modal-success p {
-  color: #2f2a27;
-  font-size: 18px;
-  line-height: 1.8;
-}
-
-@media (max-width: 820px) {
-  .booking-modal-card {
-    padding: 28px;
-  }
-
-  .booking-form-grid {
-    grid-template-columns: 1fr;
-  }
-}
-html,
 body {
-  overflow-x: hidden;
-  max-width: 100%;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-@media (max-width: 768px) {
-
-  section {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
-
-  h1 {
-    font-size: 42px !important;
-    line-height: 1.1 !important;
-  }
-
-}
-
-html,
-body {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-* {
-  box-sizing: border-box;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  color: var(--text-heading);
+  background: var(--bg-base);
 }
 
 img,

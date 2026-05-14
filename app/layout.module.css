@@ -1,0 +1,82 @@
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer {
+  background: linear-gradient(to right, var(--footer-from), var(--footer-to));
+  color: var(--footer-text);
+  padding: 90px 24px;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Logo column */
+.footerLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footerLogoName {
+  font-size: 42px;
+  font-weight: 300;
+  letter-spacing: 12px;
+  color: var(--footer-text);
+  margin: 0;
+}
+
+.footerLogoSub {
+  font-size: 12px;
+  letter-spacing: 6px;
+  color: var(--footer-sub);
+  margin: 8px 0 0;
+}
+
+/* Nav / Contact columns */
+.footerSectionTitle {
+  margin: 0 0 22px;
+  letter-spacing: 3px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--footer-text);
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footerLink {
+  color: var(--footer-link);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.footerLink:hover {
+  color: var(--footer-text);
+}
+
+.footerLink:focus-visible {
+  outline: 1px solid var(--footer-text);
+  outline-offset: 2px;
+}
+
+.footerContactRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Copyright */
+.footerCopyright {
+  color: var(--footer-link);
+  line-height: 1.8;
+  margin-top: 28px;
+}

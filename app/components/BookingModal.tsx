@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import styles from "./BookingModal.module.css";
 
 const BOOKING_TEXT_RE = /Запази[\s\S]*дата/i;
 const EVENT_OPTIONS = [
@@ -118,9 +119,7 @@ export default function BookingModal() {
     try {
       const response = await fetch("/api/booking", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
@@ -141,113 +140,115 @@ export default function BookingModal() {
   return (
     <div
       ref={overlayRef}
-      className="booking-modal-overlay"
+      className={styles.overlay}
       role="dialog"
       aria-modal="true"
       onClick={(event) => {
-        if (event.target === overlayRef.current) {
-          handleClose();
-        }
+        if (event.target === overlayRef.current) handleClose();
       }}
     >
-      <div className="booking-modal-card">
+      <div className={styles.card}>
         <button
-          className="booking-modal-close"
+          className={styles.closeBtn}
           onClick={handleClose}
           aria-label="Затвори формата за резервация"
         >
           ✕
         </button>
 
-        <div className="booking-modal-content">
-          <div className="booking-modal-headline">
-            <div className="booking-modal-tag">Запази дата</div>
+        <div className={styles.content}>
+          <div className={styles.headline}>
+            <div className={styles.tag}>Запази дата</div>
             <h2>Резервация на видео будка</h2>
             <p>Попълнете формата и ние ще се свържем с вас възможно най-скоро.</p>
           </div>
 
           {status === "success" ? (
-            <div className="booking-modal-success">
+            <div className={styles.success}>
               <p>Благодарим ви! Ще се свържем с вас скоро.</p>
-              <button className="booking-button" type="button" onClick={handleClose}>
+              <button className={styles.btn} type="button" onClick={handleClose}>
                 Затвори
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="booking-form">
-              <div className="booking-form-grid">
-                <label className="booking-form-field">
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <div className={styles.formGrid}>
+                <label className={styles.field}>
                   Име
                   <input
                     type="text"
                     value={form.name}
-                    onChange={(event) => handleFieldChange("name", event.target.value)}
+                    onChange={(e) => handleFieldChange("name", e.target.value)}
                     placeholder="Вашето име"
                     required
                   />
                 </label>
 
-                <label className="booking-form-field">
+                <label className={styles.field}>
                   Телефон
                   <input
                     type="tel"
                     value={form.phone}
-                    onChange={(event) => handleFieldChange("phone", event.target.value)}
+                    onChange={(e) => handleFieldChange("phone", e.target.value)}
                     placeholder="+359 88 888 7763"
                     required
                   />
                 </label>
 
-                <label className="booking-form-field">
+                <label className={styles.field}>
                   Имейл
                   <input
                     type="email"
                     value={form.email}
-                    onChange={(event) => handleFieldChange("email", event.target.value)}
+                    onChange={(e) => handleFieldChange("email", e.target.value)}
                     placeholder="example@mail.com"
                     required
                   />
                 </label>
 
-                <label className="booking-form-field">
+                <label className={styles.field}>
                   Дата на събитието
                   <input
                     type="date"
                     value={form.date}
-                    onChange={(event) => handleFieldChange("date", event.target.value)}
+                    onChange={(e) => handleFieldChange("date", e.target.value)}
                     required
                   />
                 </label>
 
-                <label className="booking-form-field">
+                <label className={styles.field}>
                   Тип събитие
                   <select
                     value={form.eventType}
-                    onChange={(event) => handleFieldChange("eventType", event.target.value)}
+                    onChange={(e) => handleFieldChange("eventType", e.target.value)}
                     required
                   >
                     {EVENT_OPTIONS.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
+                      <option key={option} value={option}>{option}</option>
                     ))}
                   </select>
                 </label>
               </div>
 
-              <label className="booking-form-field booking-form-field--span">
+              <label className={`${styles.field} ${styles.fieldSpan}`}>
                 Съобщение
                 <textarea
                   value={form.message}
-                  onChange={(event) => handleFieldChange("message", event.target.value)}
+                  onChange={(e) => handleFieldChange("message", e.target.value)}
                   placeholder="Напишете допълнителни детайли или въпроси..."
                   rows={4}
                 />
               </label>
 
-              {status === "error" && <p className="booking-form-error">{error}</p>}
+              {status === "error" && (
+                <p className={styles.error}>{error}</p>
+              )}
 
-              <button className="booking-button booking-button--full" type="submit" disabled={status === "sending"}>
+              <button
+                className={`${styles.btn} ${styles.btnFull}`}
+                type="submit"
+                disabled={status === "sending"}
+              >
                 {status === "sending" ? "Изпращане..." : "Изпрати запитване"}
               </button>
             </form>
