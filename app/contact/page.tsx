@@ -2,31 +2,10 @@
 
 import { useState } from "react";
 import styles from "./page.module.css";
+import PageIntro from "../components/PageIntro";
+import { copy } from "../copy";
 
-const contactItems = [
-  {
-    label: "Телефон",
-    value: "+359 888 887 763",
-    href: "tel:+359888887763",
-  },
-  {
-    label: "Имейл",
-    value: "eternamemories.bg@gmail.com",
-    href: "mailto:eternamemories.bg@gmail.com",
-  },
-  {
-    label: "Instagram",
-    value: "@eterna__memories",
-    href: "https://instagram.com/eterna__memories",
-    external: true,
-  },
-  {
-    label: "TikTok",
-    value: "@eterna.memories",
-    href: "https://tiktok.com/@eterna.memories",
-    external: true,
-  },
-];
+const { intro, info, form, success, errors } = copy.contact;
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -60,7 +39,7 @@ export default function ContactPage() {
       setStatus("success");
       form.reset();
     } catch (err) {
-      setErrorMsg(err instanceof Error ? err.message : "Нещо се обърка. Моля, опитайте отново.");
+      setErrorMsg(err instanceof Error ? err.message : errors.generic);
       setStatus("error");
     }
   }
@@ -69,26 +48,21 @@ export default function ContactPage() {
     <main className={styles.main}>
 
       {/* ── HERO ── */}
-      <section className={styles.hero}>
-        <div className={styles.eyebrow}>КОНТАКТИ</div>
-        <div className={styles.eyebrowLine} />
-        <h1 className={styles.heading}>Свържете се с нас</h1>
-        <p className={styles.subtext}>
-          Имате въпрос или искате да проверите свободни дати?
-          <br />
-          Ще се свържем с вас в рамките на 24 часа.
-        </p>
-      </section>
+      <PageIntro
+        eyebrow={intro.eyebrow}
+        heading={intro.heading}
+        text={intro.text}
+      />
 
       {/* ── CONTACT GRID ── */}
       <section className={styles.contactGrid}>
 
         {/* Contact info */}
         <div className={styles.infoCol}>
-          <div className={styles.infoLabel}>НАМЕРЕТЕ НИ</div>
+          <div className={styles.infoLabel}>{info.label}</div>
           <div className={styles.infoLabelLine} />
           <div className={styles.infoCards}>
-            {contactItems.map((item) => (
+            {info.items.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
@@ -104,63 +78,61 @@ export default function ContactPage() {
 
         {/* Inquiry form */}
         <div className={styles.formCol}>
-          <div className={styles.infoLabel}>ИЗПРАТЕТЕ ЗАПИТВАНЕ</div>
+          <div className={styles.infoLabel}>{form.label}</div>
           <div className={styles.infoLabelLine} />
 
           {status === "success" ? (
             <div className={styles.successBox}>
-              <div className={styles.successTitle}>Съобщението е изпратено!</div>
-              <p className={styles.successText}>
-                Благодарим ви. Ще се свържем с вас в рамките на 24 часа.
-              </p>
+              <div className={styles.successTitle}>{success.title}</div>
+              <p className={styles.successText}>{success.text}</p>
             </div>
           ) : (
             <form className={styles.form} onSubmit={handleSubmit} noValidate>
               <div className={styles.fieldRow}>
                 <div className={styles.field}>
-                  <label className={styles.label} htmlFor="name">Вашето име *</label>
+                  <label className={styles.label} htmlFor="name">{form.nameLabel}</label>
                   <input
                     id="name"
                     name="name"
                     type="text"
                     required
                     className={styles.input}
-                    placeholder="Иван Иванов"
+                    placeholder={form.namePlaceholder}
                   />
                 </div>
                 <div className={styles.field}>
-                  <label className={styles.label} htmlFor="email">Имейл *</label>
+                  <label className={styles.label} htmlFor="email">{form.emailLabel}</label>
                   <input
                     id="email"
                     name="email"
                     type="email"
                     required
                     className={styles.input}
-                    placeholder="ivan@example.com"
+                    placeholder={form.emailPlaceholder}
                   />
                 </div>
               </div>
 
               <div className={styles.field}>
-                <label className={styles.label} htmlFor="phone">Телефон</label>
+                <label className={styles.label} htmlFor="phone">{form.phoneLabel}</label>
                 <input
                   id="phone"
                   name="phone"
                   type="tel"
                   className={styles.input}
-                  placeholder="+359 ..."
+                  placeholder={form.phonePlaceholder}
                 />
               </div>
 
               <div className={styles.field}>
-                <label className={styles.label} htmlFor="message">Съобщение *</label>
+                <label className={styles.label} htmlFor="message">{form.messageLabel}</label>
                 <textarea
                   id="message"
                   name="message"
                   required
                   rows={5}
                   className={styles.textarea}
-                  placeholder="Разкажете ни за вашия повод, дата и всичко, което искате да знаем."
+                  placeholder={form.messagePlaceholder}
                 />
               </div>
 
@@ -173,7 +145,7 @@ export default function ContactPage() {
                 className={styles.submitBtn}
                 disabled={status === "loading"}
               >
-                {status === "loading" ? "ИЗПРАЩАНЕ…" : "ИЗПРАТИ ЗАПИТВАНЕ"}
+                {status === "loading" ? form.submittingBtn : form.submitBtn}
               </button>
             </form>
           )}

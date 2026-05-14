@@ -1,5 +1,8 @@
 ﻿import Link from "next/link";
 import styles from "./page.module.css";
+import HowItWorks from "./components/HowItWorks";
+import ClosingCta from "./components/ClosingCta";
+import { copy } from "./copy";
 
 /* ---- Icons ---- */
 const AlbumIcon = () => (
@@ -73,73 +76,25 @@ const StarIcon = () => (
 
 /* ---- Data ---- */
 const features = [
-  {
-    title: "ФИЗИЧЕСКИ АЛБУМ",
-    text: "Не само файлове — получавате красив физически продукт с вградени видео послания, персонализиран специално за вашето събитие.",
-    Icon: AlbumIcon,
-  },
-  {
-    title: "ПЕРСОНАЛИЗИРАНО",
-    text: "Вашите имена, дата и дизайн. Всеки детайл е направен специално за вас — от стартовия екран до финалния албум.",
-    Icon: SparkleIcon,
-  },
-  {
-    title: "БЕЗ НИКАКВО УСИЛИЕ",
-    text: "Нашият екип настройва всичко и е на място по време на цялото събитие. Гостите просто застават пред камерата.",
-    Icon: CheckCircleIcon,
-  },
+  { ...copy.home.features[0], Icon: AlbumIcon },
+  { ...copy.home.features[1], Icon: SparkleIcon },
+  { ...copy.home.features[2], Icon: CheckCircleIcon },
 ];
 
 const steps = [
-  {
-    number: "01",
-    title: "Гостите записват",
-    text: "Всеки гост застава пред будката и записва своето послание — лично, искрено, неповторимо.",
-    Icon: UserIcon,
-  },
-  {
-    number: "02",
-    title: "Ние се грижим за всичко",
-    text: "Нашият екип настройва будката и е присъствен по време на цялото събитие, за да осигури безупречно изживяване.",
-    Icon: SaveIcon,
-  },
-  {
-    number: "03",
-    title: "Получавате своя албум",
-    text: "След събитието получавате своя персонализиран физически албум с вградени видео послания, готов да го пазите цял живот.",
-    Icon: HeartIcon,
-  },
+  { ...copy.home.steps[0], icon: <UserIcon /> },
+  { ...copy.home.steps[1], icon: <SaveIcon /> },
+  { ...copy.home.steps[2], icon: <HeartIcon /> },
 ];
 
 const events = [
-  { title: "Сватби", Icon: WeddingIcon },
-  { title: "Рождени дни", Icon: GiftIcon },
-  { title: "Корпоративни събития", Icon: BriefcaseIcon },
-  { title: "Baby Showers", Icon: StarIcon },
+  { title: copy.home.events.items[0], Icon: WeddingIcon },
+  { title: copy.home.events.items[1], Icon: GiftIcon },
+  { title: copy.home.events.items[2], Icon: BriefcaseIcon },
+  { title: copy.home.events.items[3], Icon: StarIcon },
 ];
 
-const faqs = [
-  {
-    q: "Как получавам видеата след събитието?",
-    a: "Получавате своя персонализиран физически албум с вграден дигитален достъп до всички видео послания. Нищо не се губи.",
-  },
-  {
-    q: "Нужен ли е интернет по време на събитието?",
-    a: "Не — будката работи напълно офлайн. Нужна е само захранваща розетка.",
-  },
-  {
-    q: "Нужно ли е гостите да инсталират приложение?",
-    a: "Не. Просто застават пред камерата, натискат бутон и записват. Нищо повече.",
-  },
-  {
-    q: "За какви поводи е подходяща будката?",
-    a: "За всеки специален повод — сватби, рождени дни, корпоративни събития, baby showers и всякакви тържества.",
-  },
-  {
-    q: "Как се осъществява резервацията?",
-    a: "Изпратете ни запитване чрез бутона по-долу и ние ще се свържем с вас в рамките на 24 часа.",
-  },
-];
+const { faq, founder, social, hero, albumSection, events: eventsContent, closingCta } = copy.home;
 
 export default function Home() {
   return (
@@ -149,23 +104,13 @@ export default function Home() {
       <section className={styles.hero}>
         <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
-          <h1 className={styles.heroHeading}>
-            НЕ САМО СНИМКИ.
-            <br />
-            ГЛАСОВЕ. УСМИВКИ.
-            <br />
-            ЕМОЦИИ.
+          <h1 className={styles.heroHeading} style={{ whiteSpace: "pre-line" }}>
+            {hero.heading}
           </h1>
           <div className={styles.heroDivider} />
-          <p className={styles.heroText}>
-            Видео будка за послания, която превръща
-            <br />
-            думите на вашите гости в незабравим
-            <br />
-            физически албум.
-          </p>
+          <p className={styles.heroText}>{hero.body}</p>
           <button type="button" className={styles.heroCta} data-booking-trigger="true">
-            ПРОВЕРИ СВОБОДНИ ДАТИ
+            {hero.cta}
           </button>
         </div>
       </section>
@@ -192,22 +137,14 @@ export default function Home() {
       <section className={styles.albumSection}>
         <div className={styles.albumSectionInner}>
           <div className={styles.albumSectionText}>
-            <div className={styles.albumEyebrow}>ВАШИЯТ АЛБУМ</div>
+            <div className={styles.albumEyebrow}>{albumSection.eyebrow}</div>
             <div className={styles.albumEyebrowLine} />
-            <h2 className={styles.albumSectionHeading}>
-              Физически.
-              <br />
-              Персонализиран.
-              <br />
-              Завинаги ваш.
+            <h2 className={styles.albumSectionHeading} style={{ whiteSpace: "pre-line" }}>
+              {albumSection.heading}
             </h2>
-            <p className={styles.albumSectionBody}>
-              Не просто файлове на USB — получавате красив физически албум,
-              персонализиран с имената ви и датата на събитието, с вграден
-              дигитален достъп до всички видео послания от гостите ви.
-            </p>
+            <p className={styles.albumSectionBody}>{albumSection.body}</p>
             <Link href="/video-album" className={styles.albumSectionLink}>
-              Разгледай видео албума →
+              {albumSection.link}
             </Link>
           </div>
           <div className={styles.albumSectionVisual} />
@@ -215,34 +152,15 @@ export default function Home() {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section className={styles.howItWorks}>
-        <div className={styles.sectionHeader}>
-          <div className={styles.sectionEyebrow}>КАК РАБОТИ</div>
-          <div className={styles.sectionEyebrowLine} />
-        </div>
-        <div className={styles.stepsGrid}>
-          {steps.map((step) => (
-            <div key={step.number} className={styles.step}>
-              <div className={styles.stepIcon}>
-                <step.Icon />
-              </div>
-              <div className={styles.stepNumber}>{step.number}</div>
-              <h3 className={styles.stepTitle}>{step.title}</h3>
-              <p className={styles.stepText}>{step.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <HowItWorks steps={steps} />
 
       {/* ── EVENTS ── */}
       <section className={styles.events}>
         <div className={styles.sectionHeader}>
-          <div className={styles.sectionEyebrow}>ЗА ВСЕКИ СПЕЦИАЛЕН ПОВОД</div>
+          <div className={styles.sectionEyebrow}>{eventsContent.eyebrow}</div>
           <div className={styles.sectionEyebrowLine} />
-          <h2 className={styles.eventsHeading}>
-            Сватби. Рождени дни.
-            <br />
-            Корпоративни събития. Baby showers.
+          <h2 className={styles.eventsHeading} style={{ whiteSpace: "pre-line" }}>
+            {eventsContent.heading}
           </h2>
         </div>
         <div className={styles.eventsGrid}>
@@ -260,34 +178,28 @@ export default function Home() {
       {/* ── FOUNDER ── */}
       <section className={styles.founder}>
         <div className={styles.founderInner}>
-          <div className={styles.sectionEyebrow}>ЗА НАС</div>
+          <div className={styles.sectionEyebrow}>{founder.eyebrow}</div>
           <div className={styles.sectionEyebrowLine} />
           <blockquote className={styles.founderQuote}>
-            &ldquo;Присъствах на сватба на близки приятели и осъзнах, че след края на
-            вечерта всичко казано — сълзите, смехът, думите от сърце — просто
-            изчезна. Eterna Memories се роди от едно желание: да дадем на
-            хората нещо, което да остане.&rdquo;
+            &ldquo;{founder.quote}&rdquo;
           </blockquote>
-          <div className={styles.founderName}>— [ИМЕ НА ОСНОВАТЕЛЯ]</div>
+          <div className={styles.founderName}>{founder.name}</div>
         </div>
       </section>
 
       {/* ── INSTAGRAM TEASER ── */}
       <section className={styles.social}>
         <div className={styles.sectionHeader}>
-          <div className={styles.sectionEyebrow}>ВИЖТЕ НИ В ДЕЙСТВИЕ</div>
+          <div className={styles.sectionEyebrow}>{social.eyebrow}</div>
           <div className={styles.sectionEyebrowLine} />
-          <p className={styles.socialText}>
-            Истории от реални събития, зад кулисите и много повече —
-            последвайте ни в Instagram.
-          </p>
+          <p className={styles.socialText}>{social.text}</p>
           <a
             href="https://instagram.com/eterna__memories"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.socialLink}
           >
-            @eterna__memories →
+            {social.handle}
           </a>
         </div>
       </section>
@@ -295,11 +207,11 @@ export default function Home() {
       {/* ── FAQ ── */}
       <section className={styles.faq}>
         <div className={styles.sectionHeader}>
-          <div className={styles.sectionEyebrow}>ВЪПРОСИ & ОТГОВОРИ</div>
+          <div className={styles.sectionEyebrow}>{faq.eyebrow}</div>
           <div className={styles.sectionEyebrowLine} />
         </div>
         <div className={styles.faqList}>
-          {faqs.map((item) => (
+          {faq.items.map((item) => (
             <div key={item.q} className={styles.faqItem}>
               <div className={styles.faqQ}>{item.q}</div>
               <div className={styles.faqA}>{item.a}</div>
@@ -309,20 +221,7 @@ export default function Home() {
       </section>
 
       {/* ── FINAL CTA ── */}
-      <section className={styles.finalCta}>
-        <h2 className={styles.finalCtaHeading}>
-          Готови ли сте да запазите
-          <br />
-          своите спомени?
-        </h2>
-        <button
-          type="button"
-          className={styles.finalCtaBtn}
-          data-booking-trigger="true"
-        >
-          ПРОВЕРИ СВОБОДНИ ДАТИ
-        </button>
-      </section>
+      <ClosingCta heading={closingCta.heading} />
 
     </main>
   );

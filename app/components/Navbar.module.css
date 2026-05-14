@@ -45,7 +45,8 @@
   background-color: rgba(252, 250, 247, 0.97);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 48px;
+  /* top padding clears the absolutely-positioned close button (bar height = 20+28+20 = 68px) */
+  padding: 88px 48px 48px;
   z-index: 99;
   display: flex;
   flex-direction: column;
@@ -62,14 +63,16 @@
   pointer-events: auto;
 }
 
+/* Absolutely positioned so it sits in the exact same spot as the hamburger icon */
 .closeBtn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   font-size: 28px;
+  line-height: 1;
   cursor: pointer;
-  margin-bottom: 30px;
   user-select: none;
   color: var(--text-heading);
-  line-height: 1;
-  width: fit-content;
 }
 
 .menuLink {
@@ -242,6 +245,14 @@
   }
 
   .menu {
-    padding: 36px 24px;
+    /* top padding clears the close button (bar height = 14+22+14 = 50px) */
+    padding: 64px 24px 36px;
+  }
+
+  /* Match close button size and position exactly with the hamburger */
+  .closeBtn {
+    top: 14px;
+    left: 16px;
+    font-size: 22px;
   }
 }

@@ -1,0 +1,52 @@
+/* ── PageIntro ── */
+.section {
+  padding: 120px 60px 80px;
+  text-align: center;
+  background: var(--bg-section);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-label);
+  margin-bottom: 16px;
+  font-family: var(--font-cormorant), serif;
+}
+
+.line {
+  width: 50px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 56px;
+}
+
+.heading {
+  font-size: 54px;
+  font-weight: 300;
+  color: var(--text-heading);
+  line-height: 1.15;
+  margin: 0 0 32px;
+  font-family: var(--font-cormorant), serif;
+}
+
+.text {
+  font-size: 19px;
+  line-height: 2;
+  color: var(--text-body);
+  max-width: 580px;
+  margin: 0 auto;
+  font-family: var(--font-cormorant), serif;
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 80px 24px 60px;
+  }
+
+  .heading {
+    font-size: 34px;
+  }
+}

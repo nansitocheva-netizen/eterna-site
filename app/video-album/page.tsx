@@ -5,13 +5,18 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { SkipBack, Play, SkipForward, Volume1, Volume2 } from "lucide-react";
 import styles from "./page.module.css";
+import PageIntro from "../components/PageIntro";
+import ClosingCta from "../components/ClosingCta";
+import { copy } from "../copy";
+
+const { intro, album, playerLabels, closingCta } = copy.videoAlbum;
 
 const playerIcons = [
-  { Icon: SkipBack,    label: "Предишно",     left: "35px"  },
-  { Icon: Play,        label: "Пусни",        left: "75px"  },
-  { Icon: SkipForward, label: "Следващо",     left: "115px" },
-  { Icon: Volume1,     label: "Намали звука", left: "152px" },
-  { Icon: Volume2,     label: "Увеличи звука",left: "192px" },
+  { Icon: SkipBack,    label: playerLabels.prev,       left: "35px"  },
+  { Icon: Play,        label: playerLabels.play,       left: "75px"  },
+  { Icon: SkipForward, label: playerLabels.next,       left: "115px" },
+  { Icon: Volume1,     label: playerLabels.volumeDown, left: "152px" },
+  { Icon: Volume2,     label: playerLabels.volumeUp,   left: "192px" },
 ];
 
 export default function VideoAlbumPage() {
@@ -21,24 +26,11 @@ export default function VideoAlbumPage() {
     <main className={styles.main}>
 
       {/* ── INTRO ── */}
-      <section className={styles.intro}>
-        <div className={styles.introEyebrow}>ВИДЕО АЛБУМ</div>
-        <div className={styles.introLine} />
-        <h1 className={styles.introHeading}>
-          Физически продукт.
-          <br />
-          Дигитален достъп.
-          <br />
-          Спомени за цял живот.
-        </h1>
-        <p className={styles.introText}>
-          Не просто видео файлове — получавате красив физически албум,
-          персонализиран с вашите имена и дата на събитието, с вграден
-          дигитален достъп до всички послания от гостите ви.
-          <br />
-          По-долу можете да разгледате как изглежда отвътре.
-        </p>
-      </section>
+      <PageIntro
+        eyebrow={intro.eyebrow}
+        heading={intro.heading}
+        text={intro.text}
+      />
 
       <section className={styles.content}>
         <div className={styles.albumContainer}>
@@ -56,7 +48,7 @@ export default function VideoAlbumPage() {
                   <div style={{ position: "relative", width: "100%", height: "100%" }}>
                     <Image
                       src="/album-closed.png"
-                      alt="Затворен албум"
+                      alt={album.closedAlt}
                       fill
                       priority
                       style={{
@@ -66,8 +58,8 @@ export default function VideoAlbumPage() {
                     />
 
                     <div className={styles.albumTextOverlay}>
-                      <div className={styles.albumNames}>Стефан &amp; Даниела</div>
-                      <div className={styles.albumDate}>04.05.2026г.</div>
+                      <div className={styles.albumNames}>{album.names}</div>
+                      <div className={styles.albumDate}>{album.date}</div>
                       <div className={styles.albumLogo}>
                         <Image
                           src="/logo.png"
@@ -82,7 +74,7 @@ export default function VideoAlbumPage() {
                     <button
                       className={styles.albumOpenBtn}
                       onClick={() => setOpen(true)}
-                      aria-label="Отвори албума"
+                      aria-label={album.openTriggerAriaLabel}
                     />
                   </div>
                 </motion.div>
@@ -98,7 +90,7 @@ export default function VideoAlbumPage() {
                   <div style={{ position: "relative", width: "100%", height: "100%" }}>
                     <Image
                       src="/album-open.png"
-                      alt="Отворен албум"
+                      alt={album.openAlt}
                       fill
                       priority
                       style={{
@@ -129,24 +121,13 @@ export default function VideoAlbumPage() {
             className={styles.toggleBtn}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? "Затвори албума" : "Отвори албума"}
+            {open ? album.closeBtn : album.openBtn}
           </button>
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <section className={styles.albumCta}>
-        <p className={styles.albumCtaText}>
-          Искате такъв албум за вашето събитие?
-        </p>
-        <button
-          type="button"
-          className={styles.albumCtaBtn}
-          data-booking-trigger="true"
-        >
-          ПРОВЕРИ СВОБОДНИ ДАТИ
-        </button>
-      </section>
+      <ClosingCta heading={closingCta.heading} size="sm" />
 
     </main>
   );
