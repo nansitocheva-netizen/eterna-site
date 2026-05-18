@@ -27,7 +27,8 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: "Eterna Memories",
-  description: "Видео будка за послания, която запазва емоциите от вашия специален ден.",
+  description:
+    "Видео будка за послания, която запазва емоциите от вашия специален ден.",
 };
 
 export const viewport: Viewport = {
@@ -62,11 +63,21 @@ export default function RootLayout({
             <div>
               <p className={styles.footerSectionTitle}>НАВИГАЦИЯ</p>
               <div className={styles.footerLinks}>
-                <a href="/" className={styles.footerLink}>Начало</a>
-                <a href="/video-booth" className={styles.footerLink}>Видео будка</a>
-                <a href="/video-album" className={styles.footerLink}>Видео албум</a>
-                <a href="/gallery" className={styles.footerLink}>Галерия</a>
-                <a href="/contact" className={styles.footerLink}>Контакт</a>
+                <a href="/" className={styles.footerLink}>
+                  Начало
+                </a>
+                <a href="/video-booth" className={styles.footerLink}>
+                  Видео будка
+                </a>
+                <a href="/video-album" className={styles.footerLink}>
+                  Видео албум
+                </a>
+                <a href="/gallery" className={styles.footerLink}>
+                  Галерия
+                </a>
+                <a href="/contact" className={styles.footerLink}>
+                  Контакт
+                </a>
               </div>
             </div>
 
@@ -98,13 +109,13 @@ export default function RootLayout({
                   <span>@eterna__memories</span>
                 </a>
                 <a
-                  href="https://tiktok.com/@eterna.memories"
+                  href="https://tiktok.com/@eterna__memories"
                   className={`${styles.footerLink} ${styles.footerContactRow}`}
                   target="_blank"
                   rel="noreferrer noopener"
                 >
                   <FaTiktok />
-                  <span>@eterna.memories</span>
+                  <span>@eterna__memories</span>
                 </a>
               </div>
             </div>

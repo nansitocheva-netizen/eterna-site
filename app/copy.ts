@@ -222,7 +222,7 @@ export const copy = {
         { label: "Телефон",   value: "+359 888 887 763",            href: "tel:+359888887763",                            external: false },
         { label: "Имейл",     value: "eternamemories.bg@gmail.com", href: "mailto:eternamemories.bg@gmail.com",           external: false },
         { label: "Instagram", value: "@eterna__memories",           href: "https://instagram.com/eterna__memories",       external: true  },
-        { label: "TikTok",    value: "@eterna.memories",            href: "https://tiktok.com/@eterna.memories",          external: true  },
+        { label: "TikTok",    value: "@eterna__memories",            href: "https://tiktok.com/@eterna__memories",          external: true  },
       ],
     },
 
