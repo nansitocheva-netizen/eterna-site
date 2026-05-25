@@ -1,10 +1,8 @@
-﻿"use client";
-
-import styles from "./page.module.css";
+﻿import styles from "./page.module.css";
 import PageIntro from "../components/PageIntro";
 import ClosingCta from "../components/ClosingCta";
-import AlbumShowcase from "../components/AlbumShowcase";
 import { copy } from "../copy";
+import AlbumShowcase from "../components/AlbumShowcase";
 
 const { intro, closingCta } = copy.videoAlbum;
 
@@ -18,7 +16,8 @@ export default function VideoAlbumPage() {
       />
 
       <section className={styles.content}>
-        <AlbumShowcase />
+        {/* <ShowcaseVideo /> */}
+        <AlbumShowcase noCover />
       </section>
 
       <ClosingCta heading={closingCta.heading} size="sm" />

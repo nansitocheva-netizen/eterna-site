@@ -2,6 +2,14 @@
    VIDEO ALBUM — pure CSS / vector component
    ============================================= */
 
+@font-face {
+  font-family: "Miss Katherine Cyrillic";
+  src: url("/fonts/miss-katherine-cyrillic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .albumContainer {
   width: 100%;
   max-width: min(1320px, 96vw);
@@ -30,6 +38,18 @@
 
 .albumViewportOpen {
   width: calc(var(--page-w) * 2);
+}
+
+.albumViewportNoCover {
+  width: var(--page-w);
+}
+
+.albumBookNoCover {
+  width: var(--page-w);
+}
+
+.albumViewportNoCover .spread::after {
+  display: none;
 }
 
 .albumBook {
@@ -273,9 +293,22 @@
 
 .coverFront {
   --spine-w: clamp(14px, 2.8%, 22px);
+  background-color: #ffffff;
+  background-image: none;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     4px 0 16px rgba(0, 0, 0, 0.06);
+}
+
+.albumTextured .coverFront {
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.5) 0,
+      rgba(255, 255, 255, 0.5) 1px,
+      rgba(0, 0, 0, 0.028) 1px,
+      rgba(0, 0, 0, 0.028) 2px
+    );
 }
 
 .coverInside {
@@ -307,49 +340,58 @@
   right: 0;
   bottom: 0;
   left: var(--spine-w);
+  padding: 10% 7% 8%;
+  pointer-events: none;
+}
+
+.coverNamesBlock {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 12% 8%;
-  text-align: center;
-  pointer-events: none;
+  gap: clamp(4px, 1vw, 10px);
+  min-height: 62%;
+  margin-top: 4%;
 }
 
-.coverNames {
+.coverName1,
+.coverConjunction,
+.coverName2,
+.coverDate {
   margin: 0;
-  width: 100%;
-  font-size: clamp(22px, 3.2vw, 38px);
-  font-style: italic;
-  font-weight: 300;
-  letter-spacing: clamp(3px, 0.6vw, 7px);
-  color: var(--gold);
-  font-family: var(--font-cormorant), serif;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
-  /* letter-spacing pushes text optically left — nudge back */
-  padding-left: clamp(3px, 0.6vw, 7px);
+  font-family: "Miss Katherine Cyrillic", var(--font-cormorant), serif;
+  font-style: normal;
+  font-weight: 400;
+  color: #111111;
+  line-height: 1;
+}
+
+.coverName1 {
+  align-self: flex-start;
+  margin-left: 6%;
+  font-size: clamp(40px, 7.5vw, 88px);
+  letter-spacing: 0.02em;
+}
+
+.coverConjunction {
+  font-size: clamp(32px, 5.8vw, 68px);
+  letter-spacing: 0.04em;
+}
+
+.coverName2 {
+  align-self: flex-end;
+  margin-right: 5%;
+  font-size: clamp(40px, 7.5vw, 88px);
+  letter-spacing: 0.02em;
 }
 
 .coverDate {
-  margin: clamp(8px, 1.5vw, 14px) 0 0;
-  width: 100%;
-  font-size: clamp(10px, 1.2vw, 14px);
-  letter-spacing: clamp(2px, 0.45vw, 4px);
-  color: var(--gold);
-  font-family: var(--font-cormorant), serif;
-  opacity: 0.75;
-  padding-left: clamp(2px, 0.45vw, 4px);
-}
-
-.coverLogo {
-  margin-top: clamp(20px, 4vw, 36px);
-  opacity: 0.5;
-}
-
-.coverLogoImg {
-  width: clamp(130px, 22vw, 220px) !important;
-  height: auto !important;
-  object-fit: contain;
+  position: absolute;
+  right: 8%;
+  bottom: 8%;
+  font-size: clamp(16px, 2.6vw, 28px);
+  font-weight: 300;
+  letter-spacing: 0.06em;
 }
 
 .coverOpenBtn {

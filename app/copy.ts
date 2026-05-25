@@ -176,14 +176,23 @@ export const copy = {
     intro: {
       eyebrow: "ВИДЕО АЛБУМ",
       heading: "Физически продукт.\nДигитален достъп.\nСпомени за цял живот.",
-      text: "Не просто видео файлове — получавате красив физически албум, персонализиран с вашите имена и дата на събитието, с вграден дигитален достъп до всички послания от гостите ви. По-долу можете да разгледате как изглежда отвътре.",
+      text: "Не просто видео файлове — получавате красив физически албум, персонализиран с вашите имена и дата на събитието, с вграден дигитален достъп до всички послания от гостите ви. По-долу можете да разгледате как изглежда албумът.",
+    },
+
+    showcase: {
+      src: "/showcase.MOV",
+      ariaLabel: "Демо видео на видео албума",
     },
 
     album: {
-      /** Sample names shown on the demo album cover. */
-      names: "Стефан & Даниела",
+      /** Sample first name on the demo album cover. */
+      name1: "Силвия",
+      /** Conjunction between the two names on the cover. */
+      conjunction: "и",
+      /** Sample second name on the demo album cover. */
+      name2: "Петър",
       /** Sample date shown on the demo album cover. */
-      date: "04.05.2026г.",
+      date: "16.05.2026 г.",
       openBtn: "Отвори албума",
       closeBtn: "Затвори албума",
       /** Alt text for the closed album image (aria). */
@@ -197,10 +206,12 @@ export const copy = {
       /** Aria label for the demo video element (aria). */
       demoVideoAriaLabel: "Демо видео от албума",
       customiseBtn: "Персонализирай корицата",
-      titleLabel: "Заглавие",
-      titlePlaceholder: "Стефан & Даниела",
-      subtitleLabel: "Подзаглавие",
-      subtitlePlaceholder: "04.05.2026г.",
+      name1Label: "Първо име",
+      name1Placeholder: "Силвия",
+      name2Label: "Второ име",
+      name2Placeholder: "Петър",
+      dateLabel: "Дата",
+      datePlaceholder: "16.05.2026 г.",
     },
 
     /** Aria labels for the player controls inside the open album (aria). */
