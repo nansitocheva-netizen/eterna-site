@@ -221,7 +221,7 @@ export default function AlbumShowcase({
                 <p className={styles.coverDate}>{coverSubtitle}</p>
                 <div className={styles.coverLogo}>
                   <Image
-                    src="/logo.PNG"
+                    src="/logo.png"
                     alt="Eterna Logo"
                     width={200}
                     height={64}
