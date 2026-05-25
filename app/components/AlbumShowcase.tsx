@@ -28,6 +28,9 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
   const [open, setOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [customising, setCustomising] = useState(false);
+  const [coverTitle, setCoverTitle] = useState(album.names);
+  const [coverSubtitle, setCoverSubtitle] = useState(album.date);
 
   const beginTransition = useCallback((nextOpen: boolean) => {
     setIsAnimating(true);
@@ -88,6 +91,12 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
     if (open) return;
     setIsPlaying(false);
   }, [open]);
+
+  useEffect(() => {
+    if (open) setCustomising(false);
+  }, [open]);
+
+  const showCustomiseForm = customising && !open;
 
   const controls = [
     {
@@ -176,8 +185,8 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
               <div className={styles.coverSpine} aria-hidden />
 
               <div className={styles.coverContent}>
-                <p className={styles.coverNames}>{album.names}</p>
-                <p className={styles.coverDate}>{album.date}</p>
+                <p className={styles.coverNames}>{coverTitle}</p>
+                <p className={styles.coverDate}>{coverSubtitle}</p>
                 <div className={styles.coverLogo}>
                   <Image
                     src="/logo.png"
@@ -199,9 +208,7 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
               )}
             </div>
 
-            <div
-              className={`${styles.coverFace} ${styles.coverInside}`}
-            >
+            <div className={`${styles.coverFace} ${styles.coverInside}`}>
               {open && (
                 <button
                   type="button"
@@ -216,9 +223,52 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
         </div>
       </div>
 
-      <button type="button" className={styles.toggleBtn} onClick={handleToggle}>
-        {open ? album.closeBtn : album.openBtn}
-      </button>
+      <div className={styles.actions}>
+        <button type="button" className={styles.toggleBtn} onClick={handleToggle}>
+          {open ? album.closeBtn : album.openBtn}
+        </button>
+
+        <button
+          type="button"
+          className={`${styles.customiseBtn} ${customising ? styles.customiseBtnActive : ""}`}
+          onClick={() => setCustomising((prev) => !prev)}
+          aria-expanded={showCustomiseForm}
+          disabled={open}
+        >
+          {album.customiseBtn}
+        </button>
+      </div>
+
+      {showCustomiseForm && (
+        <form
+          className={styles.customiseForm}
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <label className={styles.customiseField}>
+            <span className={styles.customiseLabel}>{album.titleLabel}</span>
+            <input
+              type="text"
+              className={styles.customiseInput}
+              value={coverTitle}
+              onChange={(event) => setCoverTitle(event.target.value)}
+              placeholder={album.titlePlaceholder}
+              maxLength={48}
+            />
+          </label>
+
+          <label className={styles.customiseField}>
+            <span className={styles.customiseLabel}>{album.subtitleLabel}</span>
+            <input
+              type="text"
+              className={styles.customiseInput}
+              value={coverSubtitle}
+              onChange={(event) => setCoverSubtitle(event.target.value)}
+              placeholder={album.subtitlePlaceholder}
+              maxLength={32}
+            />
+          </label>
+        </form>
+      )}
     </div>
   );
 }

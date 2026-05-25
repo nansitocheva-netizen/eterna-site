@@ -196,6 +196,11 @@ export const copy = {
       demoVideoSrc: "/demo-album.mp4",
       /** Aria label for the demo video element (aria). */
       demoVideoAriaLabel: "Демо видео от албума",
+      customiseBtn: "Персонализирай корицата",
+      titleLabel: "Заглавие",
+      titlePlaceholder: "Стефан & Даниела",
+      subtitleLabel: "Подзаглавие",
+      subtitlePlaceholder: "04.05.2026г.",
     },
 
     /** Aria labels for the player controls inside the open album (aria). */
