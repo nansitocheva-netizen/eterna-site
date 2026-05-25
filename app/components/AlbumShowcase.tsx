@@ -2,8 +2,14 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { SkipBack, Play, Pause, SkipForward, Volume1, Volume2 } from "lucide-react";
+import {
+  SkipBack,
+  Play,
+  Pause,
+  SkipForward,
+  Volume1,
+  Volume2,
+} from "lucide-react";
 import styles from "./AlbumShowcase.module.css";
 import { copy } from "../copy";
 
@@ -12,23 +18,37 @@ const { album, playerLabels } = copy.videoAlbum;
 const SKIP_SECONDS = 10;
 const VOLUME_STEP = 0.1;
 
-/** Measured from album-open.png — button center coords as % of the 1536×1024 artwork */
-const CONTROL_POSITIONS = [
-  { left: 63.74, top: 63.18 },
-  { left: 67.71, top: 63.46 },
-  { left: 71.68, top: 63.34 },
-  { left: 75.39, top: 63.26 },
-  { left: 79.26, top: 63.14 },
-] as const;
+type AlbumShowcaseProps = {
+  /** Ribbed fabric-style surface. Default is plain smooth white. */
+  textured?: boolean;
+};
 
-export default function AlbumShowcase() {
+export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [open, setOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const handleOpen = useCallback(() => setOpen(true), []);
+  const beginTransition = useCallback((nextOpen: boolean) => {
+    setIsAnimating(true);
+    if (!nextOpen) {
+      videoRef.current?.pause();
+      setIsPlaying(false);
+    }
+    setOpen(nextOpen);
+  }, []);
 
-  const handleToggle = useCallback(() => setOpen((v) => !v), []);
+  const handleOpen = useCallback(() => beginTransition(true), [beginTransition]);
+
+  const handleToggle = useCallback(() => {
+    beginTransition(!open);
+  }, [open, beginTransition]);
+
+  useEffect(() => {
+    if (!isAnimating) return;
+    const id = window.setTimeout(() => setIsAnimating(false), 1100);
+    return () => window.clearTimeout(id);
+  }, [isAnimating]);
 
   const handleTogglePlay = useCallback(async () => {
     const video = videoRef.current;
@@ -63,10 +83,7 @@ export default function AlbumShowcase() {
   }, []);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video || open) return;
-
-    video.pause();
+    if (open) return;
     setIsPlaying(false);
   }, [open]);
 
@@ -105,101 +122,87 @@ export default function AlbumShowcase() {
 
   return (
     <div className={styles.albumContainer}>
-      <div className={styles.albumWrapper}>
-        <AnimatePresence mode="wait">
-          {!open ? (
-            <motion.div
-              key="closed"
-              className={styles.albumStage}
-              initial={{ opacity: 0, rotateY: -8 }}
-              animate={{ opacity: 1, rotateY: 0 }}
-              exit={{ opacity: 0, rotateY: 10 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <Image
-                src="/album-closed.png"
-                alt={album.closedAlt}
-                fill
-                priority
-                className={styles.albumArt}
-                style={{
-                  filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.16))",
-                }}
-              />
+      <div
+        className={`${styles.albumViewport} ${open ? styles.albumViewportOpen : ""} ${isAnimating ? styles.albumViewportAnimating : ""}`}
+        aria-label={open ? album.openAlt : album.closedAlt}
+      >
+        <div
+          className={`${styles.albumBook} ${textured ? styles.albumTextured : ""}`}
+        >
+          <div className={styles.spread}>
+            <div className={`${styles.pageSlot} ${styles.pageLeft}`} aria-hidden />
 
-              <div className={styles.albumTextOverlay}>
-                <div className={styles.albumNames}>{album.names}</div>
-                <div className={styles.albumDate}>{album.date}</div>
-                <div className={styles.albumLogo}>
+            <div className={`${styles.pageSlot} ${styles.pageRight}`}>
+              <div className={styles.pageRightInner}>
+                <div className={styles.screenBezel}>
+                  <video
+                    ref={videoRef}
+                    className={`${styles.video} ${open ? "" : styles.videoHidden}`}
+                    src={album.demoVideoSrc}
+                    preload="metadata"
+                    playsInline
+                    aria-hidden={!open}
+                    aria-label={album.demoVideoAriaLabel}
+                    onPlay={() => setIsPlaying(true)}
+                    onPause={() => setIsPlaying(false)}
+                    onEnded={() => setIsPlaying(false)}
+                  />
+                </div>
+
+                <div className={styles.controlRow}>
+                  {controls.map(({ id, Icon, label, onClick }) => (
+                    <button
+                      key={id}
+                      type="button"
+                      className={styles.controlBtn}
+                      aria-label={label}
+                      onClick={onClick}
+                      disabled={!open}
+                    >
+                      <Icon className={styles.controlIcon} strokeWidth={1.4} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`${styles.cover} ${open ? styles.coverOpen : ""} ${isAnimating ? styles.coverAnimating : ""}`}
+          >
+            <div className={`${styles.coverFace} ${styles.coverFront}`}>
+              <div className={styles.coverSpine} aria-hidden />
+
+              <div className={styles.coverContent}>
+                <p className={styles.coverNames}>{album.names}</p>
+                <p className={styles.coverDate}>{album.date}</p>
+                <div className={styles.coverLogo}>
                   <Image
                     src="/logo.png"
                     alt="Eterna Logo"
-                    width={240}
-                    height={80}
-                    style={{ objectFit: "contain" }}
+                    width={200}
+                    height={64}
+                    className={styles.coverLogoImg}
                   />
                 </div>
               </div>
 
-              <button
-                type="button"
-                className={styles.albumOpenBtn}
-                onClick={handleOpen}
-                aria-label={album.openTriggerAriaLabel}
-              />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="open"
-              className={styles.albumStage}
-              initial={{ opacity: 0, rotateY: -14, scale: 0.985 }}
-              animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-              exit={{ opacity: 0, rotateY: 8 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className={styles.albumFrame}>
-                <Image
-                  src="/album-open.png"
-                  alt={album.openAlt}
-                  fill
-                  priority
-                  className={styles.albumArt}
-                  style={{
-                    filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.18))",
-                  }}
+              {!open && (
+                <button
+                  type="button"
+                  className={styles.coverOpenBtn}
+                  onClick={handleOpen}
+                  aria-label={album.openTriggerAriaLabel}
                 />
-              </div>
+              )}
+            </div>
 
-              <video
-                ref={videoRef}
-                className={styles.videoScreen}
-                src={album.demoVideoSrc}
-                preload="metadata"
-                playsInline
-                aria-label={album.demoVideoAriaLabel}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                onEnded={() => setIsPlaying(false)}
-              />
-
-              {controls.map(({ id, Icon, label, onClick }, index) => (
-                  <button
-                    key={id}
-                    type="button"
-                    className={styles.controlBtn}
-                    style={{
-                      left: `${CONTROL_POSITIONS[index].left}%`,
-                      top: `${CONTROL_POSITIONS[index].top}%`,
-                    }}
-                    aria-label={label}
-                    onClick={onClick}
-                  >
-                    <Icon className={styles.controlIcon} strokeWidth={1.5} />
-                  </button>
-                ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+            <div
+              className={`${styles.coverFace} ${styles.coverInside}`}
+              aria-hidden
+            />
+          </div>
+        </div>
       </div>
 
       <button type="button" className={styles.toggleBtn} onClick={handleToggle}>
