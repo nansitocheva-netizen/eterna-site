@@ -40,6 +40,8 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
 
   const handleOpen = useCallback(() => beginTransition(true), [beginTransition]);
 
+  const handleClose = useCallback(() => beginTransition(false), [beginTransition]);
+
   const handleToggle = useCallback(() => {
     beginTransition(!open);
   }, [open, beginTransition]);
@@ -199,8 +201,17 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
 
             <div
               className={`${styles.coverFace} ${styles.coverInside}`}
-              aria-hidden
-            />
+            >
+              {open && (
+                <button
+                  type="button"
+                  className={styles.coverCloseBtn}
+                  onClick={handleClose}
+                  disabled={isAnimating}
+                  aria-label={album.closeBtn}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

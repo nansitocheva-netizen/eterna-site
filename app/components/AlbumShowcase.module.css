@@ -241,7 +241,19 @@
 .coverOpen {
   transform: rotateY(-168deg);
   z-index: 1;
-  pointer-events: none;
+}
+
+.coverCloseBtn {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  z-index: 2;
+}
+
+.coverCloseBtn:disabled {
+  cursor: default;
 }
 
 .coverFace {
