@@ -2,6 +2,7 @@
 import styles from "./page.module.css";
 import HowItWorks from "./components/HowItWorks";
 import ClosingCta from "./components/ClosingCta";
+import ShowcaseVideo from "./components/ShowcaseVideo";
 import { copy } from "./copy";
 
 /* ---- Icons ---- */
@@ -147,7 +148,9 @@ export default function Home() {
               {albumSection.link}
             </Link>
           </div>
-          <div className={styles.albumSectionVisual} />
+          <div className={styles.albumSectionVisual}>
+            <ShowcaseVideo />
+          </div>
         </div>
       </section>
 
