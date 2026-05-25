@@ -8,6 +8,7 @@ import { MdMailOutline } from "react-icons/md";
 import { SiInstagram } from "react-icons/si";
 import { FaTiktok } from "react-icons/fa";
 import styles from "./layout.module.css";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,9 +64,9 @@ export default function RootLayout({
             <div>
               <p className={styles.footerSectionTitle}>НАВИГАЦИЯ</p>
               <div className={styles.footerLinks}>
-                <a href="/" className={styles.footerLink}>
+                <Link href="/" className={styles.footerLink}>
                   Начало
-                </a>
+                </Link>
                 <a href="/video-booth" className={styles.footerLink}>
                   Видео будка
                 </a>
