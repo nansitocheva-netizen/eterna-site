@@ -23,7 +23,9 @@ type AlbumShowcaseProps = {
   textured?: boolean;
 };
 
-export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) {
+export default function AlbumShowcase({
+  textured = false,
+}: AlbumShowcaseProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const autoplayOnTrackChange = useRef(false);
   const [open, setOpen] = useState(false);
@@ -36,16 +38,25 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
 
   const beginTransition = useCallback((nextOpen: boolean) => {
     setIsAnimating(true);
-    if (!nextOpen) {
+    if (nextOpen) {
+      setCustomising(false);
+    } else {
       videoRef.current?.pause();
       setIsPlaying(false);
+      setVideoIndex(0);
     }
     setOpen(nextOpen);
   }, []);
 
-  const handleOpen = useCallback(() => beginTransition(true), [beginTransition]);
+  const handleOpen = useCallback(
+    () => beginTransition(true),
+    [beginTransition],
+  );
 
-  const handleClose = useCallback(() => beginTransition(false), [beginTransition]);
+  const handleClose = useCallback(
+    () => beginTransition(false),
+    [beginTransition],
+  );
 
   const handleToggle = useCallback(() => {
     beginTransition(!open);
@@ -94,12 +105,6 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
   }, []);
 
   useEffect(() => {
-    if (open) return;
-    setIsPlaying(false);
-    setVideoIndex(0);
-  }, [open]);
-
-  useEffect(() => {
     const video = videoRef.current;
     if (!video || !open) return;
 
@@ -111,49 +116,8 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
     video.play().catch(() => setIsPlaying(false));
   }, [videoIndex, open]);
 
-  useEffect(() => {
-    if (open) setCustomising(false);
-  }, [open]);
-
   const showCustomiseForm = customising && !open;
-
-  const controls = [
-    {
-      id: "previous",
-      Icon: SkipBack,
-      label: playerLabels.previous,
-      onClick: handlePlayPrevious,
-      disabled: !open || videoIndex <= 0,
-    },
-    {
-      id: "play",
-      Icon: isPlaying ? Pause : Play,
-      label: isPlaying ? playerLabels.pause : playerLabels.play,
-      onClick: handleTogglePlay,
-      disabled: !open,
-    },
-    {
-      id: "next",
-      Icon: SkipForward,
-      label: playerLabels.next,
-      onClick: handlePlayNext,
-      disabled: !open || videoIndex >= demoVideos.length - 1,
-    },
-    {
-      id: "volumeDown",
-      Icon: Volume1,
-      label: playerLabels.volumeDown,
-      onClick: () => handleVolumeChange(-VOLUME_STEP),
-      disabled: !open,
-    },
-    {
-      id: "volumeUp",
-      Icon: Volume2,
-      label: playerLabels.volumeUp,
-      onClick: () => handleVolumeChange(VOLUME_STEP),
-      disabled: !open,
-    },
-  ];
+  const PlayIcon = isPlaying ? Pause : Play;
 
   return (
     <div className={styles.albumContainer}>
@@ -165,7 +129,10 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
           className={`${styles.albumBook} ${textured ? styles.albumTextured : ""}`}
         >
           <div className={styles.spread}>
-            <div className={`${styles.pageSlot} ${styles.pageLeft}`} aria-hidden />
+            <div
+              className={`${styles.pageSlot} ${styles.pageLeft}`}
+              aria-hidden
+            />
 
             <div className={`${styles.pageSlot} ${styles.pageRight}`}>
               <div className={styles.pageRightInner}>
@@ -185,18 +152,59 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
                 </div>
 
                 <div className={styles.controlRow}>
-                  {controls.map(({ id, Icon, label, onClick, disabled }) => (
-                    <button
-                      key={id}
-                      type="button"
-                      className={styles.controlBtn}
-                      aria-label={label}
-                      onClick={onClick}
-                      disabled={disabled}
-                    >
-                      <Icon className={styles.controlIcon} strokeWidth={1.4} />
-                    </button>
-                  ))}
+                  <button
+                    type="button"
+                    className={styles.controlBtn}
+                    aria-label={playerLabels.previous}
+                    onClick={handlePlayPrevious}
+                    disabled={!open || videoIndex <= 0}
+                  >
+                    <SkipBack
+                      className={styles.controlIcon}
+                      strokeWidth={1.4}
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.controlBtn}
+                    aria-label={
+                      isPlaying ? playerLabels.pause : playerLabels.play
+                    }
+                    onClick={handleTogglePlay}
+                    disabled={!open}
+                  >
+                    <PlayIcon className={styles.controlIcon} strokeWidth={1.4} />
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.controlBtn}
+                    aria-label={playerLabels.next}
+                    onClick={handlePlayNext}
+                    disabled={!open || videoIndex >= demoVideos.length - 1}
+                  >
+                    <SkipForward
+                      className={styles.controlIcon}
+                      strokeWidth={1.4}
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.controlBtn}
+                    aria-label={playerLabels.volumeDown}
+                    onClick={() => handleVolumeChange(-VOLUME_STEP)}
+                    disabled={!open}
+                  >
+                    <Volume1 className={styles.controlIcon} strokeWidth={1.4} />
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.controlBtn}
+                    aria-label={playerLabels.volumeUp}
+                    onClick={() => handleVolumeChange(VOLUME_STEP)}
+                    disabled={!open}
+                  >
+                    <Volume2 className={styles.controlIcon} strokeWidth={1.4} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -213,7 +221,7 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
                 <p className={styles.coverDate}>{coverSubtitle}</p>
                 <div className={styles.coverLogo}>
                   <Image
-                    src="/logo.png"
+                    src="/logo.PNG"
                     alt="Eterna Logo"
                     width={200}
                     height={64}
@@ -248,7 +256,11 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
       </div>
 
       <div className={styles.actions}>
-        <button type="button" className={styles.toggleBtn} onClick={handleToggle}>
+        <button
+          type="button"
+          className={styles.toggleBtn}
+          onClick={handleToggle}
+        >
           {open ? album.closeBtn : album.openBtn}
         </button>
 
