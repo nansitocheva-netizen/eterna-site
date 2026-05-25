@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import styles from "./AlbumShowcase.module.css";
 import { copy } from "../copy";
+import logoImage from "@/public/logo.png";
 
 const { album, playerLabels } = copy.videoAlbum;
 
@@ -221,11 +222,10 @@ export default function AlbumShowcase({
                 <p className={styles.coverDate}>{coverSubtitle}</p>
                 <div className={styles.coverLogo}>
                   <Image
-                    src="/logo.png"
+                    src={logoImage}
                     alt="Eterna Logo"
-                    width={200}
-                    height={64}
                     className={styles.coverLogoImg}
+                    priority
                   />
                 </div>
               </div>
