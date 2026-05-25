@@ -33,6 +33,8 @@ export default function AlbumShowcase({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [videoIndex, setVideoIndex] = useState(0);
+  const [videoAspect, setVideoAspect] = useState<number | null>(null);
+  const [showVideo, setShowVideo] = useState(false);
   const [customising, setCustomising] = useState(false);
   const [coverTitle, setCoverTitle] = useState(album.names);
   const [coverSubtitle, setCoverSubtitle] = useState(album.date);
@@ -41,10 +43,13 @@ export default function AlbumShowcase({
     setIsAnimating(true);
     if (nextOpen) {
       setCustomising(false);
+      setShowVideo(false);
     } else {
       videoRef.current?.pause();
       setIsPlaying(false);
       setVideoIndex(0);
+      setVideoAspect(null);
+      setShowVideo(false);
     }
     setOpen(nextOpen);
   }, []);
@@ -88,6 +93,8 @@ export default function AlbumShowcase({
     if (videoIndex <= 0) return;
 
     autoplayOnTrackChange.current = isPlaying;
+    setVideoAspect(null);
+    if (!isPlaying) setShowVideo(false);
     setVideoIndex((index) => index - 1);
   }, [videoIndex, isPlaying]);
 
@@ -95,6 +102,8 @@ export default function AlbumShowcase({
     if (videoIndex >= demoVideos.length - 1) return;
 
     autoplayOnTrackChange.current = isPlaying;
+    setVideoAspect(null);
+    if (!isPlaying) setShowVideo(false);
     setVideoIndex((index) => index + 1);
   }, [videoIndex, isPlaying]);
 
@@ -107,18 +116,26 @@ export default function AlbumShowcase({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !open) return;
+    if (!video || !open || !autoplayOnTrackChange.current) return;
 
     video.load();
-
-    if (!autoplayOnTrackChange.current) return;
-
     autoplayOnTrackChange.current = false;
     video.play().catch(() => setIsPlaying(false));
   }, [videoIndex, open]);
 
+  const handleVideoMetadata = useCallback(() => {
+    const video = videoRef.current;
+    if (!video?.videoWidth || !video.videoHeight) return;
+
+    setVideoAspect(video.videoWidth / video.videoHeight);
+  }, []);
+
   const showCustomiseForm = customising && !open;
   const PlayIcon = isPlaying ? Pause : Play;
+  const isPortrait = videoAspect !== null && videoAspect < 1;
+  const screenStyle = videoAspect
+    ? ({ "--video-aspect": String(videoAspect) } as React.CSSProperties)
+    : undefined;
 
   return (
     <div className={styles.albumContainer}>
@@ -140,13 +157,18 @@ export default function AlbumShowcase({
                 <div className={styles.screenBezel}>
                   <video
                     ref={videoRef}
-                    className={`${styles.video} ${open ? "" : styles.videoHidden}`}
+                    className={`${styles.video} ${isPortrait ? styles.videoPortrait : ""} ${open && showVideo ? "" : styles.videoHidden}`}
+                    style={screenStyle}
                     src={demoVideos[videoIndex]}
-                    preload="metadata"
+                    preload={showVideo ? "metadata" : "none"}
                     playsInline
                     aria-hidden={!open}
                     aria-label={album.demoVideoAriaLabel}
-                    onPlay={() => setIsPlaying(true)}
+                    onLoadedMetadata={handleVideoMetadata}
+                    onPlay={() => {
+                      setShowVideo(true);
+                      setIsPlaying(true);
+                    }}
                     onPause={() => setIsPlaying(false)}
                     onEnded={() => setIsPlaying(false)}
                   />

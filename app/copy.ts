@@ -193,7 +193,7 @@ export const copy = {
       /** Aria label for the invisible open trigger button (aria). */
       openTriggerAriaLabel: "Отвори албума",
       /** Demo videos shown inside the open album screen. Replace with real guest messages. */
-      demoVideoSources: ["/demo-album.mp4"],
+      demoVideoSources: ["/video1.mov", "/video2.mov"],
       /** Aria label for the demo video element (aria). */
       demoVideoAriaLabel: "Демо видео от албума",
       customiseBtn: "Персонализирай корицата",
