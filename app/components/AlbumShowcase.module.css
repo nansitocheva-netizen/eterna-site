@@ -264,6 +264,7 @@
 }
 
 .coverFront {
+  --spine-w: clamp(14px, 2.8%, 22px);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     4px 0 16px rgba(0, 0, 0, 0.06);
@@ -279,7 +280,7 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: clamp(14px, 2.8%, 22px);
+  width: var(--spine-w);
   background: linear-gradient(
     90deg,
     #e4e4e4 0%,
@@ -294,18 +295,22 @@
 
 .coverContent {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--spine-w);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 12% 10% 12% clamp(28px, 6%, 40px);
+  padding: 12% 8%;
   text-align: center;
   pointer-events: none;
 }
 
 .coverNames {
   margin: 0;
+  width: 100%;
   font-size: clamp(22px, 3.2vw, 38px);
   font-style: italic;
   font-weight: 300;
@@ -313,15 +318,19 @@
   color: var(--gold);
   font-family: var(--font-cormorant), serif;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+  /* letter-spacing pushes text optically left — nudge back */
+  padding-left: clamp(3px, 0.6vw, 7px);
 }
 
 .coverDate {
   margin: clamp(8px, 1.5vw, 14px) 0 0;
+  width: 100%;
   font-size: clamp(10px, 1.2vw, 14px);
   letter-spacing: clamp(2px, 0.45vw, 4px);
   color: var(--gold);
   font-family: var(--font-cormorant), serif;
   opacity: 0.75;
+  padding-left: clamp(2px, 0.45vw, 4px);
 }
 
 .coverLogo {

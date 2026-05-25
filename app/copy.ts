@@ -192,8 +192,8 @@ export const copy = {
       openAlt: "Отворен албум",
       /** Aria label for the invisible open trigger button (aria). */
       openTriggerAriaLabel: "Отвори албума",
-      /** Demo video shown inside the open album screen. Replace with real guest messages. */
-      demoVideoSrc: "/demo-album.mp4",
+      /** Demo videos shown inside the open album screen. Replace with real guest messages. */
+      demoVideoSources: ["/demo-album.mp4"],
       /** Aria label for the demo video element (aria). */
       demoVideoAriaLabel: "Демо видео от албума",
       customiseBtn: "Персонализирай корицата",
@@ -205,10 +205,10 @@ export const copy = {
 
     /** Aria labels for the player controls inside the open album (aria). */
     playerLabels: {
-      skipBack: "Назад 10 секунди",
+      previous: "Предишно видео",
       play: "Пусни",
       pause: "Пауза",
-      skipForward: "Напред 10 секунди",
+      next: "Следващо видео",
       volumeDown: "Намали звука",
       volumeUp: "Увеличи звука",
     },

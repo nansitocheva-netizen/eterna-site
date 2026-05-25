@@ -15,8 +15,8 @@ import { copy } from "../copy";
 
 const { album, playerLabels } = copy.videoAlbum;
 
-const SKIP_SECONDS = 10;
 const VOLUME_STEP = 0.1;
+const demoVideos = album.demoVideoSources;
 
 type AlbumShowcaseProps = {
   /** Ribbed fabric-style surface. Default is plain smooth white. */
@@ -25,9 +25,11 @@ type AlbumShowcaseProps = {
 
 export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const autoplayOnTrackChange = useRef(false);
   const [open, setOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [videoIndex, setVideoIndex] = useState(0);
   const [customising, setCustomising] = useState(false);
   const [coverTitle, setCoverTitle] = useState(album.names);
   const [coverSubtitle, setCoverSubtitle] = useState(album.date);
@@ -70,15 +72,19 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
     }
   }, []);
 
-  const handleSkip = useCallback((delta: number) => {
-    const video = videoRef.current;
-    if (!video || !Number.isFinite(video.duration)) return;
+  const handlePlayPrevious = useCallback(() => {
+    if (videoIndex <= 0) return;
 
-    video.currentTime = Math.max(
-      0,
-      Math.min(video.duration, video.currentTime + delta),
-    );
-  }, []);
+    autoplayOnTrackChange.current = isPlaying;
+    setVideoIndex((index) => index - 1);
+  }, [videoIndex, isPlaying]);
+
+  const handlePlayNext = useCallback(() => {
+    if (videoIndex >= demoVideos.length - 1) return;
+
+    autoplayOnTrackChange.current = isPlaying;
+    setVideoIndex((index) => index + 1);
+  }, [videoIndex, isPlaying]);
 
   const handleVolumeChange = useCallback((delta: number) => {
     const video = videoRef.current;
@@ -90,7 +96,20 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
   useEffect(() => {
     if (open) return;
     setIsPlaying(false);
+    setVideoIndex(0);
   }, [open]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !open) return;
+
+    video.load();
+
+    if (!autoplayOnTrackChange.current) return;
+
+    autoplayOnTrackChange.current = false;
+    video.play().catch(() => setIsPlaying(false));
+  }, [videoIndex, open]);
 
   useEffect(() => {
     if (open) setCustomising(false);
@@ -100,34 +119,39 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
 
   const controls = [
     {
-      id: "skipBack",
+      id: "previous",
       Icon: SkipBack,
-      label: playerLabels.skipBack,
-      onClick: () => handleSkip(-SKIP_SECONDS),
+      label: playerLabels.previous,
+      onClick: handlePlayPrevious,
+      disabled: !open || videoIndex <= 0,
     },
     {
       id: "play",
       Icon: isPlaying ? Pause : Play,
       label: isPlaying ? playerLabels.pause : playerLabels.play,
       onClick: handleTogglePlay,
+      disabled: !open,
     },
     {
-      id: "skipForward",
+      id: "next",
       Icon: SkipForward,
-      label: playerLabels.skipForward,
-      onClick: () => handleSkip(SKIP_SECONDS),
+      label: playerLabels.next,
+      onClick: handlePlayNext,
+      disabled: !open || videoIndex >= demoVideos.length - 1,
     },
     {
       id: "volumeDown",
       Icon: Volume1,
       label: playerLabels.volumeDown,
       onClick: () => handleVolumeChange(-VOLUME_STEP),
+      disabled: !open,
     },
     {
       id: "volumeUp",
       Icon: Volume2,
       label: playerLabels.volumeUp,
       onClick: () => handleVolumeChange(VOLUME_STEP),
+      disabled: !open,
     },
   ];
 
@@ -149,7 +173,7 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
                   <video
                     ref={videoRef}
                     className={`${styles.video} ${open ? "" : styles.videoHidden}`}
-                    src={album.demoVideoSrc}
+                    src={demoVideos[videoIndex]}
                     preload="metadata"
                     playsInline
                     aria-hidden={!open}
@@ -161,14 +185,14 @@ export default function AlbumShowcase({ textured = false }: AlbumShowcaseProps) 
                 </div>
 
                 <div className={styles.controlRow}>
-                  {controls.map(({ id, Icon, label, onClick }) => (
+                  {controls.map(({ id, Icon, label, onClick, disabled }) => (
                     <button
                       key={id}
                       type="button"
                       className={styles.controlBtn}
                       aria-label={label}
                       onClick={onClick}
-                      disabled={!open}
+                      disabled={disabled}
                     >
                       <Icon className={styles.controlIcon} strokeWidth={1.4} />
                     </button>
