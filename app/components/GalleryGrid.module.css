@@ -1,0 +1,153 @@
+.section {
+  padding: 0 60px 120px;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.masonry {
+  column-count: 3;
+  column-gap: 24px;
+}
+
+.item {
+  display: block;
+  width: 100%;
+  margin: 0 0 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  break-inside: avoid;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.item:hover {
+  opacity: 0.92;
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+/* ── Lightbox ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px;
+  background: rgba(28, 20, 15, 0.92);
+  box-sizing: border-box;
+}
+
+.lightboxImageWrap {
+  max-width: min(900px, 100%);
+  max-height: 100%;
+}
+
+.lightboxImage {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 120px);
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+.closeBtn,
+.navBtn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--footer-text);
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 999px;
+  transition: opacity 180ms ease, background 180ms ease;
+}
+
+.closeBtn:hover,
+.navBtn:hover {
+  opacity: 0.85;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.closeBtn:focus-visible,
+.navBtn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.closeBtn {
+  top: 20px;
+  right: 20px;
+}
+
+.navBtn {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.navPrev {
+  left: 16px;
+}
+
+.navNext {
+  right: 16px;
+}
+
+@media (max-width: 1024px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 0 24px 80px;
+  }
+
+  .masonry {
+    column-count: 1;
+    column-gap: 16px;
+  }
+
+  .item {
+    margin-bottom: 16px;
+  }
+
+  .lightbox {
+    padding: 48px 16px;
+  }
+
+  .navPrev {
+    left: 4px;
+  }
+
+  .navNext {
+    right: 4px;
+  }
+
+  .closeBtn {
+    top: 12px;
+    right: 12px;
+  }
+}

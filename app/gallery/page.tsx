@@ -1,27 +1,30 @@
+import PageIntro from "../components/PageIntro";
+import GalleryGrid from "../components/GalleryGrid";
 import styles from "./page.module.css";
+import { copy } from "../copy";
+
+const { intro, instagram } = copy.gallery;
 
 export default function GalleryPage() {
   return (
     <main className={styles.main}>
-      <section className={styles.hero}>
-        <div className={styles.eyebrow}>ГАЛЕРИЯ</div>
-        <div className={styles.eyebrowLine} />
-        <h1 className={styles.heading}>Скоро тук</h1>
-        <p className={styles.text}>
-          Подготвяме галерия с кадри от реални събития —
-          <br />
-          истински моменти, истински емоции.
-        </p>
-        <p className={styles.subtext}>
-          Докато чакате, вижте нашите последни публикации в Instagram.
-        </p>
+      <PageIntro
+        eyebrow={intro.eyebrow}
+        heading={intro.heading}
+        text={intro.text}
+      />
+
+      <GalleryGrid />
+
+      <section className={styles.instagram}>
+        <p className={styles.instagramText}>{instagram.text}</p>
         <a
           href="https://instagram.com/eterna__memories"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.instagramBtn}
         >
-          @eterna__memories →
+          {instagram.handle}
         </a>
       </section>
     </main>
