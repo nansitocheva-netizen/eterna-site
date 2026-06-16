@@ -23,7 +23,7 @@
   border: 1px solid rgba(120, 96, 72, 0.12);
   box-shadow: 0 34px 72px rgba(15, 11, 8, 0.16);
   border-radius: 28px;
-  padding: 36px 40px 32px;
+  padding: 36px 40px 32px 36px;
   position: relative;
   opacity: 0;
   transform: translateY(18px) scale(0.98);
@@ -38,6 +38,7 @@
   overflow-y: auto;
   max-height: calc(90vh - 100px);
   padding-right: 4px;
+  padding-left: 4px;
   padding-top: 8px;
 }
 
