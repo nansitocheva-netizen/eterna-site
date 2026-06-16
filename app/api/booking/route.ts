@@ -1,7 +1,7 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const recipient = "eternamemories.bg@gmail.com";
+const recipient = process.env.EMAIL_RECIPIENT ?? "eternamemories.bg@gmail.com";
 
 function formatEmailHtml(form: Record<string, string>) {
   return `
@@ -35,42 +35,42 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Попълнете всички задължителни полета." }, { status: 400 });
   }
 
-  const smtpUser = process.env.EMAIL_USER;
-  const smtpPass = process.env.EMAIL_PASS;
-
-  if (!smtpUser || !smtpPass) {
-    return NextResponse.json(
-      { error: "SMTP credentials are not configured. Set EMAIL_USER and EMAIL_PASS in .env.local." },
-      { status: 500 }
-    );
-  }
-
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: smtpUser,
-      pass: smtpPass,
-    },
-  });
-
-  const html = formatEmailHtml(payload as Record<string, string>);
   const text = formatEmailText(payload as Record<string, string>);
 
+  // Dev mode: no API key configured → print to terminal and return success
+  if (!process.env.RESEND_API_KEY) {
+    console.log("\n========== [BOOKING FORM — DEV MODE] ==========");
+    console.log("No RESEND_API_KEY set — skipping real send.");
+    console.log(`To: ${recipient}`);
+    console.log(text);
+    console.log("================================================\n");
+    return NextResponse.json({ success: true });
+  }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const html = formatEmailHtml(payload as Record<string, string>);
+  const from = process.env.EMAIL_FROM ?? "onboarding@resend.dev";
+
   try {
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER || "no-reply@eternamemories.bg",
+    const { error } = await resend.emails.send({
+      from,
       to: recipient,
       subject: `Ново запитване за дата от ${name}`,
       text,
       html,
     });
 
+    if (error) {
+      return NextResponse.json(
+        { error: `Неуспешно изпращане на имейл: ${error.message}` },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (err) {
     return NextResponse.json(
-      { error: `Неуспешно изпращане на имейл: ${error instanceof Error ? error.message : "Грешка"}` },
+      { error: `Неуспешно изпращане на имейл: ${err instanceof Error ? err.message : "Грешка"}` },
       { status: 500 }
     );
   }
