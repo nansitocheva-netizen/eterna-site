@@ -255,16 +255,16 @@ export const copy = {
 
     /** Gallery images — add or reorder entries as new photos are added. */
     images: [
-      { src: "/gallery/IMG_8856.jpeg", alt: "Eterna Memories видео будка на събитие" },
-      { src: "/gallery/IMG_0458.png", alt: "Гост записва видео послание в будката" },
-      { src: "/gallery/IMG_9635.png", alt: "Гост записва видео послание" },
-      { src: "/gallery/IMG_8862.jpeg", alt: "Винтидж телефон и персонализирани инициали на будката" },
-      { src: "/gallery/IMG_9637.png", alt: "Гост записва видео послание" },
-      { src: "/gallery/CC48CB47-9CB9-4CBC-876E-B9D6988F0576.PNG", alt: "Гост записва видео послание" },
-      { src: "/gallery/IMG_0459.PNG", alt: "Eterna Memories видео будка" },
-      { src: "/gallery/IMG_0460.PNG", alt: "Eterna Memories видео будка на събитие" },
-      { src: "/gallery/IMG_0461.PNG", alt: "Eterna Memories видео будка на събитие" },
-      { src: "/gallery/IMG_9639.png", alt: "Гост записва видео послание" },
+      { src: "/gallery/IMG_8856.jpeg", alt: "Видео будка Eterna Memories на сватба в Пловдив" },
+      { src: "/gallery/IMG_0458.png", alt: "Гост записва видео послание във видео будката" },
+      { src: "/gallery/IMG_9635.png", alt: "Гост записва видео поздрав за младоженците" },
+      { src: "/gallery/IMG_8862.jpeg", alt: "Винтидж телефон и персонализирани инициали на видео будката" },
+      { src: "/gallery/IMG_9637.png", alt: "Гост записва видео послание на събитие" },
+      { src: "/gallery/CC48CB47-9CB9-4CBC-876E-B9D6988F0576.png", alt: "Гост записва видео послание във видео будката" },
+      { src: "/gallery/IMG_0459.png", alt: "Видео будка Eterna Memories за послания" },
+      { src: "/gallery/IMG_0460.png", alt: "Видео будка Eterna Memories на събитие в Пловдив" },
+      { src: "/gallery/IMG_0461.png", alt: "Видео будка Eterna Memories на тържество" },
+      { src: "/gallery/IMG_9639.png", alt: "Гост записва видео поздрав на сватба" },
     ],
   },
 

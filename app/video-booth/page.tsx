@@ -2,6 +2,14 @@ import styles from "./page.module.css";
 import HowItWorks from "../components/HowItWorks";
 import ClosingCta from "../components/ClosingCta";
 import { copy } from "../copy";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "Видео будка под наем за сватба и събития | Пловдив",
+  description:
+    "Видео будка за послания под наем в Пловдив и региона. Гостите записват видео поздрави, които превръщаме в персонализиран албум. Проверете свободни дати.",
+  path: "/video-booth",
+});
 
 const { hero, steps: stepsData, included, closingCta } = copy.videoBooth;
 

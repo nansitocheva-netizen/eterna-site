@@ -3,6 +3,14 @@ import PageIntro from "../components/PageIntro";
 import ClosingCta from "../components/ClosingCta";
 import { copy } from "../copy";
 import AlbumShowcase from "../components/AlbumShowcase";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "Видео албум със спомени и видео послания | Пловдив",
+  description:
+    "Персонализиран физически видео албум с вграден дигитален достъп до всички видео послания от вашите гости. Спомен за цял живот от Eterna Memories.",
+  path: "/video-album",
+});
 
 const { intro, closingCta } = copy.videoAlbum;
 

@@ -9,6 +9,7 @@ import { SiInstagram } from "react-icons/si";
 import { FaTiktok } from "react-icons/fa";
 import styles from "./layout.module.css";
 import Link from "next/link";
+import { siteConfig, siteKeywords } from "./seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,9 +28,56 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Eterna Memories",
-  description:
-    "Видео будка за послания, която запазва емоциите от вашия специален ден.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default:
+      "Видео будка под наем за сватби и събития в България | Eterna Memories",
+    template: "%s | Eterna Memories",
+  },
+  description: siteConfig.description,
+  keywords: siteKeywords,
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  applicationName: siteConfig.name,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title:
+      "Видео будка под наем за сватби и събития в България | Eterna Memories",
+    description: siteConfig.description,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Eterna Memories — видео будка за послания",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Видео будка под наем за сватби и събития в България | Eterna Memories",
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {

@@ -2,6 +2,14 @@ import PageIntro from "../components/PageIntro";
 import GalleryGrid from "../components/GalleryGrid";
 import styles from "./page.module.css";
 import { copy } from "../copy";
+import { pageMetadata } from "../seo";
+
+export const metadata = pageMetadata({
+  title: "Галерия — видео будка на реални събития | Пловдив",
+  description:
+    "Кадри от реални събития с видео будката Eterna Memories — гости пред будката, персонализирани детайли и спомени от сватби и тържества в Пловдив.",
+  path: "/gallery",
+});
 
 const { intro, instagram } = copy.gallery;
 
