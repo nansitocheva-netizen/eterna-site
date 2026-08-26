@@ -148,7 +148,7 @@ export const copy = {
       eyebrow: "ЗА НАС",
       quote: "Присъствах на сватба на близки приятели и осъзнах, че след края на вечерта всичко казано — сълзите, смехът, думите от сърце — просто изчезна. Eterna Memories се роди от едно желание: да дадем на хората нещо, което да остане.",
       /** Replace placeholder with the founder's actual name. */
-      name: "— [ИМЕ НА ОСНОВАТЕЛЯ]",
+      name: "— от Създателката на Eterna Memories",
     },
 
     social: {
