@@ -447,10 +447,10 @@ export const copy = {
           productKey: "video-guestbook",
         },
         {
-          title: "Video Guestbook с ретро телефон",
+          title: "Видео будка с ретро телефон",
           text: "Емблематичната ни овална будка с декоративен винтидж телефон.",
           image: "/product-video-booth.png",
-          imageAlt: "Video Guestbook с ретро телефон Eterna",
+          imageAlt: "Видео будка с ретро телефон Eterna",
           cta: "Разгледай →",
           href: "/video-booth",
           productKey: "video-booth",
