@@ -10,6 +10,9 @@ import { FaTiktok } from "react-icons/fa";
 import styles from "./layout.module.css";
 import Link from "next/link";
 import { siteConfig, siteKeywords } from "./seo";
+import { copy } from "./copy";
+
+const { footer, contactChannels } = copy;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -104,81 +107,69 @@ export default function RootLayout({
           <div className={styles.footerGrid}>
             {/* Logo */}
             <div className={styles.footerLogo}>
-              <h1 className={styles.footerLogoName}>ETERNA</h1>
-              <p className={styles.footerLogoSub}>MEMORIES</p>
+              <h1 className={styles.footerLogoName}>{footer.logoName}</h1>
+              <p className={styles.footerLogoSub}>{footer.logoSub}</p>
             </div>
 
             {/* Navigation */}
             <div>
-              <p className={styles.footerSectionTitle}>НАВИГАЦИЯ</p>
+              <p className={styles.footerSectionTitle}>{footer.sectionNav}</p>
               <div className={styles.footerLinks}>
-                <Link href="/" className={styles.footerLink}>
-                  Начало
-                </Link>
-                <a href="/video-guestbook" className={styles.footerLink}>
-                  Видео будка с микрофон
-                </a>
-                <a href="/photo-booth" className={styles.footerLink}>
-                  Фото будка
-                </a>
-                <a href="/video-booth" className={styles.footerLink}>
-                  Video Guestbook с ретро телефон
-                </a>
-                <a href="/video-album" className={styles.footerLink}>
-                  Видео албум
-                </a>
-                <a href="/gallery" className={styles.footerLink}>
-                  Галерия
-                </a>
-                <a href="/contact" className={styles.footerLink}>
-                  Контакт
-                </a>
+                {footer.navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={styles.footerLink}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
             </div>
 
             {/* Contact */}
             <div>
-              <p className={styles.footerSectionTitle}>КОНТАКТИ</p>
+              <p className={styles.footerSectionTitle}>{footer.sectionContact}</p>
               <div className={styles.footerLinks}>
                 <a
-                  href="tel:+359888887763"
+                  href={contactChannels.phone.href}
                   className={`${styles.footerLink} ${styles.footerContactRow}`}
                 >
                   <BsTelephone />
-                  <span>+359888887763</span>
+                  <span>{contactChannels.phone.value}</span>
                 </a>
                 <a
-                  href="mailto:eternamemories.bg@gmail.com"
+                  href={contactChannels.email.href}
                   className={`${styles.footerLink} ${styles.footerContactRow}`}
                 >
                   <MdMailOutline />
-                  <span>eternamemories.bg@gmail.com</span>
+                  <span>{contactChannels.email.value}</span>
                 </a>
                 <a
-                  href="https://instagram.com/eterna__memories"
+                  href={contactChannels.instagram.href}
                   className={`${styles.footerLink} ${styles.footerContactRow}`}
                   target="_blank"
                   rel="noreferrer noopener"
                 >
                   <SiInstagram />
-                  <span>@eterna__memories</span>
+                  <span>{contactChannels.instagram.value}</span>
                 </a>
                 <a
-                  href="https://tiktok.com/@eterna__memories"
+                  href={contactChannels.tiktok.href}
                   className={`${styles.footerLink} ${styles.footerContactRow}`}
                   target="_blank"
                   rel="noreferrer noopener"
                 >
                   <FaTiktok />
-                  <span>@eterna__memories</span>
+                  <span>{contactChannels.tiktok.value}</span>
                 </a>
               </div>
             </div>
 
             {/* Copyright */}
             <div className={styles.footerCopyright}>
-              <div>© 2026 ETERNA</div>
-              <div>All rights reserved.</div>
+              <div>{footer.copyright}</div>
+              <div>{footer.rights}</div>
             </div>
           </div>
         </footer>

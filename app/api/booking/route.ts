@@ -1,7 +1,8 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
+import { email } from "@/app/copy";
 
-const recipient = process.env.EMAIL_RECIPIENT ?? "eternamemories.bg@gmail.com";
+const recipient = process.env.EMAIL_RECIPIENT ?? email;
 
 function formatEmailHtml(form: Record<string, string>) {
   const product = form.product || "(не е посочен)";

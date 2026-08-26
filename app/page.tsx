@@ -291,7 +291,7 @@ export default function Home() {
           <div className={styles.sectionEyebrowLine} />
           <p className={styles.socialText}>{social.text}</p>
           <a
-            href="https://instagram.com/eterna__memories"
+            href={copy.contactChannels.instagram.href}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.socialLink}

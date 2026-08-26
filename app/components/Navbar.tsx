@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import styles from "./Navbar.module.css";
+import { copy } from "../copy";
+
+const { nav } = copy;
 
 /**
  * The mobile hamburger toggle is driven entirely by CSS
@@ -20,23 +23,6 @@ function closeMenu() {
   if (toggle) toggle.checked = false;
 }
 
-/**
- * All product entries — used both by the desktop dropdown and the
- * mobile slide-in menu so the two stay in sync automatically.
- * `href` starting with "#booking" opens the modal (pre-set to the
- * given `productKey`). All others navigate normally.
- */
-const PRODUCT_LINKS: Array<{
-  label: string;
-  href: string;
-  productKey?: string;
-}> = [
-  { label: "Видео будка с микрофон",         href: "/video-guestbook" },
-  { label: "Фото будка",                      href: "/photo-booth" },
-  { label: "Video Guestbook с ретро телефон", href: "/video-booth" },
-  { label: "Видео албум",                     href: "/video-album" },
-];
-
 export default function Navbar() {
   return (
     <header className={styles.header}>
@@ -51,48 +37,51 @@ export default function Navbar() {
       />
 
       {/* Slide-in menu panel (mobile) */}
-      <div className={styles.menu} role="navigation" aria-label="Главно меню">
+      <div
+        className={styles.menu}
+        role="navigation"
+        aria-label={nav.ariaMainMenu}
+      >
         <label
           htmlFor="nav-toggle"
           className={styles.closeBtn}
-          aria-label="Затвори меню"
+          aria-label={nav.ariaCloseMenu}
         >
           ✕
         </label>
-        <Link href="/" className={styles.menuLink} onClick={closeMenu}>
-          Начало
+        <Link
+          href={nav.home.href}
+          className={styles.menuLink}
+          onClick={closeMenu}
+        >
+          {nav.home.label}
         </Link>
 
-        <div className={styles.menuGroupLabel}>Продукти</div>
-        {PRODUCT_LINKS.map((item) =>
-          item.href.startsWith("#") ? (
-            <button
-              key={item.label}
-              type="button"
-              className={styles.menuSubLink}
-              data-booking-trigger="true"
-              data-booking-product={item.productKey}
-              onClick={closeMenu}
-            >
-              {item.label}
-            </button>
-          ) : (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={styles.menuSubLink}
-              onClick={closeMenu}
-            >
-              {item.label}
-            </Link>
-          ),
-        )}
+        <div className={styles.menuGroupLabel}>{nav.products.label}</div>
+        {nav.products.items.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={styles.menuSubLink}
+            onClick={closeMenu}
+          >
+            {item.label}
+          </Link>
+        ))}
 
-        <Link href="/gallery" className={styles.menuLink} onClick={closeMenu}>
-          Галерия
+        <Link
+          href={nav.gallery.href}
+          className={styles.menuLink}
+          onClick={closeMenu}
+        >
+          {nav.gallery.label}
         </Link>
-        <Link href="/contact" className={styles.menuLink} onClick={closeMenu}>
-          Контакти
+        <Link
+          href={nav.contact.href}
+          className={styles.menuLink}
+          onClick={closeMenu}
+        >
+          {nav.contact.label}
         </Link>
       </div>
 
@@ -102,7 +91,7 @@ export default function Navbar() {
         <label
           htmlFor="nav-toggle"
           className={styles.hamburger}
-          aria-label="Отвори меню"
+          aria-label={nav.ariaOpenMenu}
         >
           ☰
         </label>
@@ -115,59 +104,46 @@ export default function Navbar() {
               className={`${styles.desktopLink} ${styles.dropdownTrigger}`}
               aria-haspopup="true"
             >
-              Продукти
+              {nav.products.label}
               <span className={styles.chevron} aria-hidden="true">
                 ▾
               </span>
             </Link>
             <div className={styles.dropdownPanel} role="menu">
-              {PRODUCT_LINKS.map((item) =>
-                item.href.startsWith("#") ? (
-                  <button
-                    key={item.label}
-                    type="button"
-                    className={styles.dropdownItem}
-                    data-booking-trigger="true"
-                    data-booking-product={item.productKey}
-                    role="menuitem"
-                  >
-                    {item.label}
-                  </button>
-                ) : (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={styles.dropdownItem}
-                    role="menuitem"
-                  >
-                    {item.label}
-                  </Link>
-                ),
-              )}
+              {nav.products.items.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={styles.dropdownItem}
+                  role="menuitem"
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
           </div>
-          <Link href="/gallery" className={styles.desktopLink}>
-            Галерия
+          <Link href={nav.gallery.href} className={styles.desktopLink}>
+            {nav.gallery.label}
           </Link>
         </nav>
 
         {/* Logo — centered on both mobile and desktop */}
-        <Link href="/" className={styles.logo} onClick={closeMenu}>
+        <Link href={nav.home.href} className={styles.logo} onClick={closeMenu}>
           ETERNA MEMORIES
         </Link>
 
         {/* Desktop: right nav + CTA */}
         <div className={styles.desktopNavRight}>
           <nav className={styles.desktopNavRightLinks}>
-            <Link href="/video-album" className={styles.desktopLink}>
-              Видео албум
+            <Link href={nav.videoAlbum.href} className={styles.desktopLink}>
+              {nav.videoAlbum.label}
             </Link>
-            <Link href="/contact" className={styles.desktopLink}>
-              Контакти
+            <Link href={nav.contact.href} className={styles.desktopLink}>
+              {nav.contact.label}
             </Link>
           </nav>
           <button className={styles.ctaBtn} data-booking-trigger="true">
-            ЗАПАЗИ ДАТА
+            {nav.cta}
           </button>
         </div>
       </div>

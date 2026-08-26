@@ -6,7 +6,7 @@
 
 **Language:** All UI copy is in Bulgarian. All user-facing strings live in `app/copy.ts` — always edit copy there, never inline.
 
-**Business contact:** `eternamemories.bg@gmail.com`, `+359888887763`, Instagram `@eterna__memories`, TikTok `@eterna.memories`.
+**Business contact:** `events@eterna-memories.com`, `+359888887763`, Instagram `@eterna__memories`, TikTok `@eterna.memories`.
 
 ---
 

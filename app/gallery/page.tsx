@@ -27,7 +27,7 @@ export default function GalleryPage() {
       <section className={styles.instagram}>
         <p className={styles.instagramText}>{instagram.text}</p>
         <a
-          href="https://instagram.com/eterna__memories"
+          href={copy.contactChannels.instagram.href}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.instagramBtn}

@@ -13,6 +13,21 @@
  *   can then replace the direct import with no key renames needed.
  */
 
+/**
+ * Contact channels — single source of truth for phone, email and social
+ * accounts. Change values here and every page (navbar, footer, contact page,
+ * inline links, JSON-LD, etc.) picks up the update automatically.
+ *
+ * `value` is what users see; `href` is what the browser follows.
+ */
+export const email = "events@eterna-memories.com";
+const contactChannels = {
+  phone:     { label: "Телефон",   value: "+359 888 887 763",            href: "tel:+359888887763" },
+  email:     { label: "Имейл",     value: email, href: `mailto:${email}` },
+  instagram: { label: "Instagram", value: "@eterna__memories",           href: "https://instagram.com/eterna__memories" },
+  tiktok:    { label: "TikTok",    value: "@eterna__memories",           href: "https://tiktok.com/@eterna__memories" },
+} as const;
+
 export const copy = {
 
   /* ─── Shared across pages ──────────────────────────────────────────── */
@@ -21,6 +36,61 @@ export const copy = {
     checkDatesBtn: "ПРОВЕРИ СВОБОДНИ ДАТИ",
     /** "How it works" section eyebrow label */
     howItWorksEyebrow: "КАК РАБОТИ",
+  },
+
+  /* ─── Contact info (phone, email, socials) ─────────────────────────── */
+  contactChannels,
+
+  /* ─── Navigation (Navbar + mobile menu) ────────────────────────────── */
+  nav: {
+    /** Top-level links shown on their own in the navbar / mobile menu. */
+    home:       { label: "Начало",      href: "/" },
+    gallery:    { label: "Галерия",     href: "/gallery" },
+    contact:    { label: "Контакти",    href: "/contact" },
+    videoAlbum: { label: "Видео албум", href: "/video-album" },
+
+    /** Product links used by both the desktop dropdown and mobile menu. */
+    products: {
+      label: "Продукти",
+      items: [
+        { label: "Видео будка с микрофон",         href: "/video-guestbook" },
+        { label: "Фото будка",                      href: "/photo-booth" },
+        { label: "Video Guestbook с ретро телефон", href: "/video-booth" },
+        { label: "Видео албум",                     href: "/video-album" },
+      ],
+    },
+
+    /** Primary CTA button in the navbar (opens BookingModal). */
+    cta: "ЗАПАЗИ ДАТА",
+
+    /** Aria labels (screen readers). */
+    ariaMainMenu: "Главно меню",
+    ariaOpenMenu: "Отвори меню",
+    ariaCloseMenu: "Затвори меню",
+  },
+
+  /* ─── Footer ───────────────────────────────────────────────────────── */
+  footer: {
+    logoName:       "ETERNA",
+    logoSub:        "MEMORIES",
+    sectionNav:     "НАВИГАЦИЯ",
+    sectionContact: "КОНТАКТИ",
+    /**
+     * Footer navigation. Kept separately from `nav` so the footer can list
+     * every page in a flat order (no dropdown) while the top nav groups the
+     * products under "Продукти".
+     */
+    navLinks: [
+      { label: "Начало",                      href: "/" },
+      { label: "Видео будка с микрофон",      href: "/video-guestbook" },
+      { label: "Фото будка",                  href: "/photo-booth" },
+      { label: "Видео будка с ретро телефон", href: "/video-booth" },
+      { label: "Видео албум",                 href: "/video-album" },
+      { label: "Галерия",                     href: "/gallery" },
+      { label: "Контакт",                     href: "/contact" },
+    ],
+    copyright: "© 2026 ETERNA",
+    rights:    "All rights reserved.",
   },
 
   /**
@@ -32,7 +102,7 @@ export const copy = {
   bookingProducts: [
     { key: "video-guestbook", label: "Видео будка с микрофон" },
     { key: "photo-booth",     label: "Фото будка" },
-    { key: "video-booth",     label: "Video Guestbook с ретро телефон" },
+    { key: "video-booth",     label: "Видео будка с ретро телефон" },
     { key: "undecided",       label: "Не съм решил/а още" },
   ],
 
@@ -85,11 +155,11 @@ export const copy = {
         {
           key: "video-booth",
           badge: "ОРИГИНАЛНАТА",
-          title: "Video Guestbook",
+          title: "Видео будка",
           subtitle: "с ретро телефон",
           text: "Нашата емблематична овална будка с декоративен винтидж телефон и таблет. Гостите записват искрени видео послания, които превръщаме в персонализиран физически албум.",
           image: "/product-video-booth.png",
-          imageAlt: "Video Guestbook с ретро телефон — Eterna",
+          imageAlt: "Видео будка с ретро телефон — Eterna",
           cta: "Разгледай",
           href: "/video-booth",
         },
@@ -154,7 +224,7 @@ export const copy = {
     social: {
       eyebrow: "ВИЖТЕ НИ В ДЕЙСТВИЕ",
       text: "Истории от реални събития, зад кулисите и много повече — последвайте ни в Instagram.",
-      handle: "@eterna__memories →",
+      handle: `${contactChannels.instagram.value} →`,
     },
 
     faq: {
@@ -397,7 +467,7 @@ export const copy = {
   /* ─── Video Booth page (/video-booth) ──────────────────────────────── */
   videoBooth: {
     hero: {
-      label: "VIDEO BOOTH",
+      label: "ВИДЕО БУДКА С ТЕЛЕФОН",
       heading: "Думите, казани\nот сърце —\nзапазени завинаги",
       body: "Дайте на гостите си гласа, който заслужават. Лични видео послания, записани пред елегантна будка — и доставени в красив физически албум след вашето събитие.",
       cta: "ЗАПАЗИ СВОЯТА ДАТА",
@@ -510,7 +580,7 @@ export const copy = {
 
     instagram: {
       text: "Още истории, зад кулисите и актуални събития — последвайте ни в Instagram.",
-      handle: "@eterna__memories →",
+      handle: `${contactChannels.instagram.value} →`,
     },
 
     /** Aria labels for the lightbox (aria). */
@@ -552,11 +622,12 @@ export const copy = {
 
     info: {
       label: "НАМЕРЕТЕ НИ",
+      /** Items derived from the shared `contactChannels` above. */
       items: [
-        { label: "Телефон",   value: "+359 888 887 763",            href: "tel:+359888887763",                            external: false },
-        { label: "Имейл",     value: "eternamemories.bg@gmail.com", href: "mailto:eternamemories.bg@gmail.com",           external: false },
-        { label: "Instagram", value: "@eterna__memories",           href: "https://instagram.com/eterna__memories",       external: true  },
-        { label: "TikTok",    value: "@eterna__memories",            href: "https://tiktok.com/@eterna__memories",          external: true  },
+        { ...contactChannels.phone,     external: false },
+        { ...contactChannels.email,     external: false },
+        { ...contactChannels.instagram, external: true  },
+        { ...contactChannels.tiktok,    external: true  },
       ],
     },
 
