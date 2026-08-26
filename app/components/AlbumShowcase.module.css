@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  container-type: inline-size;
 }
 
 .albumViewport {
@@ -34,6 +35,16 @@
 
 .albumViewportAnimating {
   transition: width 0.95s var(--album-ease);
+}
+
+/* Sized relative to its own container (not the viewport) — for embedding
+   inside a hero column alongside text, instead of as a full-width demo.
+   Uses container query units (not %) because --page-w is reused inside a
+   height calc() further down — a bare % there would resolve against the
+   (auto/indeterminate) height of the container and collapse to 0. cqi
+   always means "1% of the container's inline size", on any axis. */
+.albumViewportCompact {
+  --page-w: min(560px, 100cqi);
 }
 
 .albumViewportOpen {

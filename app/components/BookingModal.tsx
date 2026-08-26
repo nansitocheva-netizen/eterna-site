@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import styles from "./BookingModal.module.css";
+import { copy } from "../copy";
 
 const EVENT_OPTIONS = [
   "Сватба",
@@ -11,12 +12,24 @@ const EVENT_OPTIONS = [
   "Друго",
 ];
 
+const PRODUCT_OPTIONS = copy.bookingProducts;
+const DEFAULT_PRODUCT_KEY = "undecided";
+
+function productLabel(key: string): string {
+  return (
+    PRODUCT_OPTIONS.find((p) => p.key === key)?.label ??
+    PRODUCT_OPTIONS.find((p) => p.key === DEFAULT_PRODUCT_KEY)?.label ??
+    ""
+  );
+}
+
 const initialForm = {
   name: "",
   phone: "",
   email: "",
   date: "",
   eventType: "Сватба",
+  product: productLabel(DEFAULT_PRODUCT_KEY),
   message: "",
 };
 
@@ -52,9 +65,17 @@ export default function BookingModal() {
   useEffect(() => {
     const handleGlobalClick = (event: MouseEvent) => {
       if (open) return;
-      const target = (event.target as HTMLElement)?.closest("[data-booking-trigger='true']");
+      const target = (event.target as HTMLElement)?.closest(
+        "[data-booking-trigger='true']",
+      ) as HTMLElement | null;
       if (!target) return;
       event.preventDefault();
+
+      /* Pre-select the product if the trigger specifies one via
+       * data-booking-product="<key>". Falls back to the "undecided" option. */
+      const productKey =
+        target.getAttribute("data-booking-product") || DEFAULT_PRODUCT_KEY;
+      setForm((current) => ({ ...current, product: productLabel(productKey) }));
       setOpen(true);
     };
 
@@ -217,6 +238,21 @@ export default function BookingModal() {
                   >
                     {EVENT_OPTIONS.map((option) => (
                       <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className={`${styles.field} ${styles.fieldSpan}`}>
+                  Какъв продукт ви интересува?
+                  <select
+                    value={form.product}
+                    onChange={(e) => handleFieldChange("product", e.target.value)}
+                    required
+                  >
+                    {PRODUCT_OPTIONS.map((option) => (
+                      <option key={option.key} value={option.label}>
+                        {option.label}
+                      </option>
                     ))}
                   </select>
                 </label>

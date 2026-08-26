@@ -1,5 +1,4 @@
 ﻿import styles from "./page.module.css";
-import PageIntro from "../components/PageIntro";
 import ClosingCta from "../components/ClosingCta";
 import { copy } from "../copy";
 import AlbumShowcase from "../components/AlbumShowcase";
@@ -12,20 +11,36 @@ export const metadata = pageMetadata({
   path: "/video-album",
 });
 
-const { intro, closingCta } = copy.videoAlbum;
+const { hero, closingCta } = copy.videoAlbum;
 
 export default function VideoAlbumPage() {
   return (
     <main className={styles.main}>
-      <PageIntro
-        eyebrow={intro.eyebrow}
-        heading={intro.heading}
-        text={intro.text}
-      />
-
-      <section className={styles.content}>
-        {/* <ShowcaseVideo /> */}
-        <AlbumShowcase noCover />
+      {/* ── HERO ── */}
+      <section className={styles.hero}>
+        <div className={styles.heroInner}>
+          <div className={styles.heroText}>
+            <div className={styles.heroLabel}>{hero.label}</div>
+            <div className={styles.heroLine} />
+            <h1
+              className={styles.heroHeading}
+              style={{ whiteSpace: "pre-line" }}
+            >
+              {hero.heading}
+            </h1>
+            <p className={styles.heroBody}>{hero.body}</p>
+            <button
+              type="button"
+              className={styles.heroCta}
+              data-booking-trigger="true"
+            >
+              {hero.cta}
+            </button>
+          </div>
+          <div className={styles.heroVisual}>
+            <AlbumShowcase noCover compact />
+          </div>
+        </div>
       </section>
 
       <ClosingCta heading={closingCta.heading} size="sm" />

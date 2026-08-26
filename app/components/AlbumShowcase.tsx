@@ -22,11 +22,14 @@ type AlbumShowcaseProps = {
   textured?: boolean;
   /** Show only the video page — no cover, left page, toggle, or customise UI. */
   noCover?: boolean;
+  /** Size relative to its own container instead of the viewport — for embedding in a hero column. */
+  compact?: boolean;
 };
 
 export default function AlbumShowcase({
   textured = false,
   noCover = false,
+  compact = false,
 }: AlbumShowcaseProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const autoplayOnTrackChange = useRef(false);
@@ -144,7 +147,7 @@ export default function AlbumShowcase({
   return (
     <div className={styles.albumContainer}>
       <div
-        className={`${styles.albumViewport} ${noCover ? styles.albumViewportNoCover : isOpen ? styles.albumViewportOpen : ""} ${isAnimating && !noCover ? styles.albumViewportAnimating : ""}`}
+        className={`${styles.albumViewport} ${compact ? styles.albumViewportCompact : ""} ${noCover ? styles.albumViewportNoCover : isOpen ? styles.albumViewportOpen : ""} ${isAnimating && !noCover ? styles.albumViewportAnimating : ""}`}
         aria-label={isOpen ? album.openAlt : album.closedAlt}
       >
         <div

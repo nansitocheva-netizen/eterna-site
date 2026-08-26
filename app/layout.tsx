@@ -115,8 +115,14 @@ export default function RootLayout({
                 <Link href="/" className={styles.footerLink}>
                   Начало
                 </Link>
+                <a href="/video-guestbook" className={styles.footerLink}>
+                  Видео будка с микрофон
+                </a>
+                <a href="/photo-booth" className={styles.footerLink}>
+                  Фото будка
+                </a>
                 <a href="/video-booth" className={styles.footerLink}>
-                  Видео будка
+                  Video Guestbook с ретро телефон
                 </a>
                 <a href="/video-album" className={styles.footerLink}>
                   Видео албум

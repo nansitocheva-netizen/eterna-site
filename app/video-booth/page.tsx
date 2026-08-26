@@ -60,6 +60,7 @@ export default function VideoBooth() {
               type="button"
               className={styles.ctaBtn}
               data-booking-trigger="true"
+              data-booking-product="video-booth"
             >
               {hero.cta}
             </button>
@@ -98,6 +99,7 @@ export default function VideoBooth() {
       <ClosingCta
         heading={closingCta.heading}
         subtext={closingCta.subtext}
+        productKey="video-booth"
       />
     </main>
   );

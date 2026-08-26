@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 const recipient = process.env.EMAIL_RECIPIENT ?? "eternamemories.bg@gmail.com";
 
 function formatEmailHtml(form: Record<string, string>) {
+  const product = form.product || "(не е посочен)";
   return `
     <div style="font-family: Arial, Helvetica, sans-serif; color: #2e2a27;">
       <h2 style="margin-bottom: 20px; color: #2b1d16;">Ново запитване за дата</h2>
@@ -13,6 +14,7 @@ function formatEmailHtml(form: Record<string, string>) {
         <tr><td style="padding: 8px 0; font-weight: 600;">Имейл</td><td style="padding: 8px 0;">${form.email}</td></tr>
         <tr><td style="padding: 8px 0; font-weight: 600;">Дата на събитието</td><td style="padding: 8px 0;">${form.date}</td></tr>
         <tr><td style="padding: 8px 0; font-weight: 600;">Тип събитие</td><td style="padding: 8px 0;">${form.eventType}</td></tr>
+        <tr><td style="padding: 8px 0; font-weight: 600;">Продукт</td><td style="padding: 8px 0;">${product}</td></tr>
         <tr><td style="padding: 8px 0; font-weight: 600; vertical-align: top;">Съобщение</td><td style="padding: 8px 0;">${form.message || "(не е попълнено)"}</td></tr>
       </table>
       <p style="margin-top: 24px; color: #61594f;">Това е автоматично генериран имейл от формата за запазване на дата на Eterna Memories.</p>
@@ -21,7 +23,8 @@ function formatEmailHtml(form: Record<string, string>) {
 }
 
 function formatEmailText(form: Record<string, string>) {
-  return `Ново запитване за дата\n\nИме: ${form.name}\nТелефон: ${form.phone}\nИмейл: ${form.email}\nДата на събитието: ${form.date}\nТип събитие: ${form.eventType}\nСъобщение: ${form.message || "(не е попълнено)"}\n\nИзпратено от Eterna Memories.`;
+  const product = form.product || "(не е посочен)";
+  return `Ново запитване за дата\n\nИме: ${form.name}\nТелефон: ${form.phone}\nИмейл: ${form.email}\nДата на събитието: ${form.date}\nТип събитие: ${form.eventType}\nПродукт: ${product}\nСъобщение: ${form.message || "(не е попълнено)"}\n\nИзпратено от Eterna Memories.`;
 }
 
 export async function POST(request: Request) {

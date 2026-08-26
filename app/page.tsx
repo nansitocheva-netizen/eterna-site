@@ -1,4 +1,5 @@
 ﻿import Link from "next/link";
+import Image from "next/image";
 import styles from "./page.module.css";
 import HowItWorks from "./components/HowItWorks";
 import ClosingCta from "./components/ClosingCta";
@@ -7,9 +8,9 @@ import { copy } from "./copy";
 import { pageMetadata } from "./seo";
 
 export const metadata = pageMetadata({
-  title: "Видео будка под наем за сватби и събития в Пловдив",
+  title: "Видео будка, фото будка и Video Guestbook под наем в Пловдив",
   description:
-    "Видео будка за послания под наем в Пловдив и региона. Гостите записват видео поздрави, които превръщаме в персонализиран физически албум за цял живот.",
+    "Видео будки и фото будка под наем в Пловдив и цяла България. Записваме гласовете и усмивките на вашите гости и ги превръщаме в персонализиран физически албум за цял живот.",
   path: "/",
 });
 
@@ -103,24 +104,109 @@ const events = [
   { title: copy.home.events.items[3], Icon: StarIcon },
 ];
 
-const { faq, founder, social, hero, albumSection, events: eventsContent, closingCta } = copy.home;
+const {
+  faq,
+  founder,
+  social,
+  hero,
+  newBanner,
+  products,
+  albumSection,
+  events: eventsContent,
+  closingCta,
+} = copy.home;
 
 export default function Home() {
   return (
     <main className={styles.main}>
 
-      {/* ── HERO ── */}
-      <section className={styles.hero}>
-        <div className={styles.heroOverlay} />
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroHeading} style={{ whiteSpace: "pre-line" }}>
-            {hero.heading}
-          </h1>
-          <div className={styles.heroDivider} />
-          <p className={styles.heroText}>{hero.body}</p>
-          <button type="button" className={styles.heroCta} data-booking-trigger="true">
-            {hero.cta}
-          </button>
+      {/* ── HERO — full-bleed banner ── */}
+      <section className={styles.hero} aria-label="Eterna Memories">
+        <div className={styles.heroImageWrap}>
+          <Image
+            src="/hero-products.png"
+            alt={hero.imageAlt}
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 65vw"
+            className={styles.heroImage}
+          />
+          <div className={styles.heroFade} />
+        </div>
+        <div className={styles.heroInner}>
+          <div className={styles.heroText}>
+            <div className={styles.heroEyebrow}>{hero.eyebrow}</div>
+            <div className={styles.heroEyebrowLine} />
+            <h1 className={styles.heroHeading} style={{ whiteSpace: "pre-line" }}>
+              {hero.heading}
+            </h1>
+            <p className={styles.heroBody}>{hero.body}</p>
+            <button
+              type="button"
+              className={styles.heroCta}
+              data-booking-trigger="true"
+            >
+              {hero.cta}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── NEW! banner ── */}
+      <section className={styles.newBanner} aria-label="Нови продукти">
+        <div className={styles.newBannerInner}>
+          <div className={styles.newBannerBadge}>{newBanner.badge}</div>
+          <p className={styles.newBannerText}>{newBanner.text}</p>
+        </div>
+      </section>
+
+      {/* ── PRODUCTS SHOWCASE ── */}
+      <section id="products" className={styles.products}>
+        <div className={styles.sectionHeader}>
+          <div className={styles.sectionEyebrow}>{products.eyebrow}</div>
+          <div className={styles.sectionEyebrowLine} />
+          <h2 className={styles.productsHeading} style={{ whiteSpace: "pre-line" }}>
+            {products.heading}
+          </h2>
+        </div>
+        <div className={styles.productsGrid}>
+          {products.items.map((p) => {
+            const isInternal = p.href.startsWith("/") && !p.href.startsWith("//");
+            return (
+              <article key={p.key} className={styles.productCard}>
+                <div className={styles.productImageWrap}>
+                  <span className={styles.productBadge}>{p.badge}</span>
+                  <Image
+                    src={p.image}
+                    alt={p.imageAlt}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 33vw"
+                    className={styles.productImage}
+                  />
+                </div>
+                <div className={styles.productBody}>
+                  <h3 className={styles.productTitle}>{p.title}</h3>
+                  <div className={styles.productSubtitle}>{p.subtitle}</div>
+                  <div className={styles.productDivider} />
+                  <p className={styles.productText}>{p.text}</p>
+                  {isInternal ? (
+                    <Link href={p.href} className={styles.productCta}>
+                      {p.cta} →
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      className={styles.productCta}
+                      data-booking-trigger="true"
+                      data-booking-product={p.key}
+                    >
+                      {p.cta} →
+                    </button>
+                  )}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 

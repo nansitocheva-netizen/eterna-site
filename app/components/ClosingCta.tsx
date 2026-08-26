@@ -7,6 +7,12 @@ type Props = {
   subtext?: string;
   buttonLabel?: string;
   size?: "sm" | "lg";
+  /**
+   * Key from `copy.bookingProducts` to pre-select in the booking modal
+   * when the CTA is clicked. Omit to leave the modal on the default
+   * "not decided yet" option.
+   */
+  productKey?: string;
 };
 
 export default function ClosingCta({
@@ -14,6 +20,7 @@ export default function ClosingCta({
   subtext,
   buttonLabel = copy.shared.checkDatesBtn,
   size = "lg",
+  productKey,
 }: Props) {
   return (
     <section className={styles.section}>
@@ -24,7 +31,12 @@ export default function ClosingCta({
         {heading}
       </h2>
       {subtext && <p className={styles.subtext}>{subtext}</p>}
-      <button type="button" className={styles.btn} data-booking-trigger="true">
+      <button
+        type="button"
+        className={styles.btn}
+        data-booking-trigger="true"
+        {...(productKey ? { "data-booking-product": productKey } : {})}
+      >
         {buttonLabel}
       </button>
     </section>
