@@ -55,7 +55,7 @@ export const copy = {
       items: [
         { label: "Видео будка с микрофон",         href: "/video-guestbook" },
         { label: "Фото будка",                      href: "/photo-booth" },
-        { label: "Video Guestbook с ретро телефон", href: "/video-booth" },
+        { label: "Видео будка с ретро телефон", href: "/video-booth" },
         { label: "Видео албум",                     href: "/video-album" },
       ],
     },
