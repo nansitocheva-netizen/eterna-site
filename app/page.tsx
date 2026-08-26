@@ -8,7 +8,7 @@ import { copy } from "./copy";
 import { pageMetadata } from "./seo";
 
 export const metadata = pageMetadata({
-  title: "Видео будка, фото будка и Video Guestbook под наем в Пловдив",
+  title: "Видео будка и фото будка под наем в Пловдив",
   description:
     "Видео будки и фото будка под наем в Пловдив и цяла България. Записваме гласовете и усмивките на вашите гости и ги превръщаме в персонализиран физически албум за цял живот.",
   path: "/",
@@ -16,26 +16,66 @@ export const metadata = pageMetadata({
 
 /* ---- Icons ---- */
 const AlbumIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
   </svg>
 );
 
 const SparkleIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
   </svg>
 );
 
 const CheckCircleIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <circle cx="12" cy="12" r="10" />
     <path d="m9 12 2 2 4-4" />
   </svg>
 );
 
 const UserIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="34"
+    height="34"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M18 21a8 8 0 0 0-16 0" />
     <circle cx="10" cy="8" r="5" />
     <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" />
@@ -43,7 +83,17 @@ const UserIcon = () => (
 );
 
 const SaveIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="34"
+    height="34"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
     <path d="M14 2v5a1 1 0 0 0 1 1h5" />
     <path d="M15.033 13.44a.647.647 0 0 1 0 1.12l-4.065 2.352a.645.645 0 0 1-.968-.56v-4.704a.645.645 0 0 1 .967-.56z" />
@@ -51,19 +101,49 @@ const SaveIcon = () => (
 );
 
 const HeartIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="34"
+    height="34"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
   </svg>
 );
 
 const WeddingIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
   </svg>
 );
 
 const GiftIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <rect x="3" y="8" width="18" height="4" rx="1" />
     <path d="M12 8v13" />
     <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
@@ -72,14 +152,34 @@ const GiftIcon = () => (
 );
 
 const BriefcaseIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
     <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
   </svg>
 );
 
 const StarIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
   </svg>
 );
@@ -119,7 +219,6 @@ const {
 export default function Home() {
   return (
     <main className={styles.main}>
-
       {/* ── HERO — full-bleed banner ── */}
       <section className={styles.hero} aria-label="Eterna Memories">
         <div className={styles.heroImageWrap}>
@@ -137,7 +236,10 @@ export default function Home() {
           <div className={styles.heroText}>
             <div className={styles.heroEyebrow}>{hero.eyebrow}</div>
             <div className={styles.heroEyebrowLine} />
-            <h1 className={styles.heroHeading} style={{ whiteSpace: "pre-line" }}>
+            <h1
+              className={styles.heroHeading}
+              style={{ whiteSpace: "pre-line" }}
+            >
               {hero.heading}
             </h1>
             <p className={styles.heroBody}>{hero.body}</p>
@@ -165,13 +267,17 @@ export default function Home() {
         <div className={styles.sectionHeader}>
           <div className={styles.sectionEyebrow}>{products.eyebrow}</div>
           <div className={styles.sectionEyebrowLine} />
-          <h2 className={styles.productsHeading} style={{ whiteSpace: "pre-line" }}>
+          <h2
+            className={styles.productsHeading}
+            style={{ whiteSpace: "pre-line" }}
+          >
             {products.heading}
           </h2>
         </div>
         <div className={styles.productsGrid}>
           {products.items.map((p) => {
-            const isInternal = p.href.startsWith("/") && !p.href.startsWith("//");
+            const isInternal =
+              p.href.startsWith("/") && !p.href.startsWith("//");
             return (
               <article key={p.key} className={styles.productCard}>
                 <div className={styles.productImageWrap}>
@@ -234,7 +340,10 @@ export default function Home() {
           <div className={styles.albumSectionText}>
             <div className={styles.albumEyebrow}>{albumSection.eyebrow}</div>
             <div className={styles.albumEyebrowLine} />
-            <h2 className={styles.albumSectionHeading} style={{ whiteSpace: "pre-line" }}>
+            <h2
+              className={styles.albumSectionHeading}
+              style={{ whiteSpace: "pre-line" }}
+            >
               {albumSection.heading}
             </h2>
             <p className={styles.albumSectionBody}>{albumSection.body}</p>
@@ -256,7 +365,10 @@ export default function Home() {
         <div className={styles.sectionHeader}>
           <div className={styles.sectionEyebrow}>{eventsContent.eyebrow}</div>
           <div className={styles.sectionEyebrowLine} />
-          <h2 className={styles.eventsHeading} style={{ whiteSpace: "pre-line" }}>
+          <h2
+            className={styles.eventsHeading}
+            style={{ whiteSpace: "pre-line" }}
+          >
             {eventsContent.heading}
           </h2>
         </div>
@@ -319,7 +431,6 @@ export default function Home() {
 
       {/* ── FINAL CTA ── */}
       <ClosingCta heading={closingCta.heading} />
-
     </main>
   );
 }
