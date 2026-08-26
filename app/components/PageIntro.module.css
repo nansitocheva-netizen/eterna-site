@@ -41,6 +41,26 @@
   font-family: var(--font-cormorant), serif;
 }
 
+/* ── Left-aligned variant (matches product page hero layout) ── */
+.alignLeft {
+  text-align: left;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.alignLeft .line {
+  margin-left: 0;
+  margin-right: 0;
+  width: 60px;
+}
+
+.alignLeft .text {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 @media (max-width: 767px) {
   .section {
     padding: 80px 24px 60px;
@@ -48,5 +68,10 @@
 
   .heading {
     font-size: 34px;
+  }
+
+  .alignLeft {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }
